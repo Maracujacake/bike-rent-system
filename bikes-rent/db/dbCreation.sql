@@ -1,0 +1,1 @@
+/* comandos relativos a inicialização do banco de dados*/
