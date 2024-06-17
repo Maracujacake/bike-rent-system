@@ -1,5 +1,28 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class GenericDAO {
- // conexao com o banco de dados mysql
+    public GenericDAO() {
+        try {
+
+            /* Setup Banco de dados MySQL */
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected Connection getConnection() throws SQLException {
+
+        String url = "jdbc:mysql://localhost:3306/bikeRentSystem?serverTimezone=America/New_York";
+
+        // return DriverManager.getConnection(url, "root", "root");
+
+        Connection con = (Connection) DriverManager.getConnection(url,
+                "root", "root");
+        return con;
+    }
 }
