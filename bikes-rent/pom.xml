@@ -1,34 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Informações para inicialização do projeto -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.rent.bike</groupId>
-	<artifactId>bikes-rent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>bike-rent</name>
 
-	<!--versão do compilador do maven -->
+	<groupId>bikes-rent</groupId>
+	<artifactId>bikes-rent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>bikes</name>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<!-- dependencias -->
 	<dependencies>
-		<dependency> <!-- dependencia junit para teste (não será usada) -->
+
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>jakarta.servlet.jsp</groupId>
+			<artifactId>jakarta.servlet.jsp-api</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency> <!-- dependencia a servlets java -->
+
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSP API -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.3</version> <!-- ou a versão compatível com seu ambiente -->
 			<scope>provided</scope>
 		</dependency>
 
@@ -46,7 +72,15 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency> <!-- driver de conexão ao banco de dados mysql -->
+		<!-- Driver JDBC (banco de dados Derby) -->
+
+		<!-- <dependency> <groupId>org.apache.derby</groupId>
+		<artifactId>derbyclient</artifactId> 
+			<version>10.14.2.0</version> <scope>runtime</scope> </dependency> -->
+
+		<!-- Driver JDBC (banco de dados MySQL) -->
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.21</version>
@@ -55,7 +89,6 @@
 
 	</dependencies>
 
-	<!-- realização de build do projeto-->
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
@@ -65,31 +98,15 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
-					<server>Tomcat9</server> <!-- versao do tomcat -->
+					<server>Tomcat9</server>
 					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<executions>
-					<execution>
-						<id>native2ascii-utf8-resources</id>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-						<configuration>
-							<dest>${project.build.directory}/classes</dest>
-							<src>${project.resources[0].directory}</src>
-							<encoding>UTF-8</encoding>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
-
 		<pluginManagement>
+			<!-- lock down plugins versions to avoid using Maven defaults (may
+			be 
+				moved to parent pom) -->
 			<plugins>
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
@@ -124,5 +141,16 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<profiles>
+		<profile>
+			<id>TomcatServer</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<tomcat.username>admin</tomcat.username>
+				<tomcat.password>admin</tomcat.password>
+			</properties>
+		</profile>
+	</profiles>
 </project>
-

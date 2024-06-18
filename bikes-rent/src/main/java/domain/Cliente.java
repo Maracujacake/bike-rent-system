@@ -24,18 +24,6 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public Cliente(String email, String senha, String nome, String telefone, String sexo,
-			String cpf, Date dataNascimento) {
-
-		this.Email = email;
-		this.Senha = senha;
-		this.Nome = nome;
-		this.Telefone = telefone;
-		this.Sexo = sexo;
-		this.DataNascimento = dataNascimento;
-		this.cpf = cpf;
-	}
-
 	public Long getId() {
 		return Id;
 	}

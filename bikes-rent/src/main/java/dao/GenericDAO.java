@@ -17,12 +17,12 @@ public class GenericDAO {
 
     protected Connection getConnection() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/bikeRentSystem?serverTimezone=America/New_York";
+        String url = "jdbc:mysql://localhost:3306/bikeRentSystem";
 
         // return DriverManager.getConnection(url, "root", "root");
-
-        Connection con = (Connection) DriverManager.getConnection(url,
-                "root", "root");
-        return con;
+        // configurar usuario e senha conforme o banco
+        String user = "chris";
+        String password = "1234";
+        return DriverManager.getConnection(url, user, password);
     }
 }
