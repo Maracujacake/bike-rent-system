@@ -36,21 +36,39 @@ public class ControllerCliente extends HttpServlet {
 
         try {
             switch (action) {
-            	/* chamar outras funçoes com base na requisiçao seguindo o exemplo abaixo
-            	 
-                case "/list":
-                    listarClientes(request, response);
+            	case "/list": // apresentação de todos os clientes
+            		listarClientes(request, response);
+            		break;
+            	case "/buscarCliente": // apresentação da pagina de busca por id
+            		paginaBuscarCliente(request, response);
+            		break;
+            	case "/procurar": // busca no banco de dados
+            		procuraCliente(request, response);
+            		break;
+            	case "/": // menu inicial
+                    paginaInicial(request, response);
                     break;
-                */ 
                 default:
-                    listarClientes(request, response);
+                	paginaInicial(request, response);
                     break;
+                    
             }
-        } catch (RuntimeException | IOException | ServletException e) {
+        } 
+        
+        catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
     }
 
+    
+    // Página inicial
+    // apresenta formulário de busca de cliente
+    private void paginaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/opcoesCliente.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    // Apresenta todos os clientes
     private void listarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Cliente> listaCliente = dao.getAll();
         
@@ -66,4 +84,39 @@ public class ControllerCliente extends HttpServlet {
 		dispatcher.forward(request, response);
 		
     }
+    
+    // apresenta formulário de busca de cliente
+    private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	System.out.println("cade a pagina fi");
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaCliente.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    
+    // procura cliente pelo seu ID no banco
+    private void procuraCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	String idCliente = request.getParameter("id");
+    	if(idCliente != null) {
+    		try {
+                long id = Long.parseLong(idCliente); 
+        		Cliente cliente = dao.get(id);
+        		
+        		if(cliente != null) {
+        			request.setAttribute("clienteEspecifico", cliente);
+        			RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteEspecifico.jsp");
+        			dispatcher.forward(request, response);
+        		}
+        		
+        		else {
+        			response.sendRedirect("Cliente não encontrado. ID não reconhecido");
+        		}
+    		}
+    		
+    		catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+    	}
+    }
+    
+    
 }
