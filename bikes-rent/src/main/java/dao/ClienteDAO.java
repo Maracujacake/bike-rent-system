@@ -28,8 +28,8 @@ public class ClienteDAO extends GenericDAO {
             statement.setString(3, cliente.getNome());
             statement.setString(4, cliente.getTelefone());
             statement.setString(5, cliente.getSexo());
-            statement.setString(5, cliente.getCpf());
-            statement.setDate(5, cliente.getDataNascimento());
+            statement.setString(6, cliente.getCpf());
+            statement.setDate(7, cliente.getDataNascimento());
             statement.executeUpdate();
 
             statement.close();
@@ -120,40 +120,37 @@ public class ClienteDAO extends GenericDAO {
     
     // UPDATE
     public void update(Cliente cliente) {
-        String sql = "UPDATE cliente SET (email, senha, nome, telefone, sexo, cpf, dataNascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+        String sql = "UPDATE cliente SET email = ?, senha = ?, nome = ?, telefone = ?, sexo = ?, cpf = ?, dataNascimento = ? WHERE id = ?";
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            
             statement.setString(1, cliente.getEmail());
             statement.setString(2, cliente.getSenha());
             statement.setString(3, cliente.getNome());
             statement.setString(4, cliente.getTelefone());
             statement.setString(5, cliente.getSexo());
-            statement.setString(5, cliente.getCpf());
-            statement.setDate(5, cliente.getDataNascimento());
+            statement.setString(6, cliente.getCpf());
+            statement.setDate(7, new java.sql.Date(cliente.getDataNascimento().getTime()));
+            statement.setLong(8, cliente.getId());
+    
             statement.executeUpdate();
-            
             statement.close();
             con.close();
         } 
-        
-        catch (SQLException e) {
-            throw new RuntimeException(e);
+        catch (SQLException e){
+            throw new RuntimeException(e);            
         }
     }
     
-    
     //DELETE
-    public void delete(Cliente cliente) {
+    public void delete(Long id) {
         String sql = "DELETE FROM cliente where id = ?";
 
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
 
-            statement.setLong(1, cliente.getId());
+            statement.setLong(1, id);
             statement.executeUpdate();
 
             statement.close();
