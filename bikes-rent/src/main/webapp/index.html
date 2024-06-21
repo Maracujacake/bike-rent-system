@@ -3,15 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href=""> <!-- caminho pro icone --> 
+    <link rel="icon" href=""> <!-- caminho para o ícone -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Bike rent</title>
+    <title>Bike Rent System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+        .font-elegant {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 flex justify-center items-center h-screen">
-    <div class="text-center">
-        <h1 class="text-4xl font-bold text-gray-800 mb-8">OIE BIKE RENT</h1>
-        <a href="cliente/" class="text-blue-500 hover:underline">Clientes</a>
+<body class="bg-cover bg-center h-screen" style="background-image: url('https://c.stocksy.com/a/JQIH00/z9/4122399.jpg');">
+    <div class="flex justify-center items-center h-full bg-black bg-opacity-40">
+        <div class="text-center text-white">
+            <h1 class="text-6xl font-elegant mb-16">Bike Rent System</h1>
+            <div class="space-x-4 mb-8">
+                <a href="cliente/" class="text-2xl hover:text-blue-300 transition duration-300">Clientes</a>
+                <a href="locadora/" class="text-2xl hover:text-blue-300 transition duration-300">Locadoras</a>
+                <a href="locacoes/" class="text-2xl hover:text-blue-300 transition duration-300">Locações</a>
+            </div>
+        </div>
     </div>
 </body>
 

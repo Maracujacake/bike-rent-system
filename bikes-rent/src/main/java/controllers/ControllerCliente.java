@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.List;
 
@@ -156,7 +158,8 @@ public class ControllerCliente extends HttpServlet {
         		}
         		
         		else {
-        			response.sendRedirect("Cliente não encontrado. ID não reconhecido");
+                    String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido", StandardCharsets.UTF_8.toString());
+                    response.sendRedirect(request.getContextPath() + "/buscaCliente.jsp?error=" + errorMessage);
         		}
     		}
     		

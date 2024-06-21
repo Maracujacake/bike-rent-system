@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="${pageContext.request.contextPath}/scripts/confirmDelete.js"></script> <!-- Atualize o caminho -->
     <title>Lista de Clientes</title>
 </head>
 <body class="bg-gray-100">
@@ -34,7 +35,7 @@
                                 <td class="border border-gray-300 px-4 py-2">${cliente.id}</td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <a href="${pageContext.request.contextPath}/cliente/editar?id=${cliente.id}" class="text-blue-500 hover:underline">Update</a>
-                                    <a href="${pageContext.request.contextPath}/cliente/deletar?id=${cliente.id}" class="text-red-500 hover:underline ml-2">Delete</a>
+                                    <a href="${pageContext.request.contextPath}/cliente/deletar?id=${cliente.id}" class="text-red-500 hover:underline ml-2 delete-link">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
