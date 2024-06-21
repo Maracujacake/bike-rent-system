@@ -4,6 +4,7 @@
 
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
     <meta charset="UTF-8">
     <title>Buscar Cliente</title>
 </head>
