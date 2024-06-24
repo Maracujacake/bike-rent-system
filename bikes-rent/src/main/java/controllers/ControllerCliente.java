@@ -18,28 +18,31 @@ import domain.Cliente;
 
 @WebServlet(urlPatterns = "/cliente/*")
 public class ControllerCliente extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private ClienteDAO dao;
 
     @Override
     public void init() {
         dao = new ClienteDAO();
-		// System.out.println("ALO"); teste de inicialização
+        // System.out.println("ALO"); teste de inicialização
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getPathInfo();
-		if(action == null) action = " ";
+        if (action == null)
+            action = " ";
 
         try {
             switch (action) {
-                //create
+                // create
                 case "/novo":
                     novoClienteForm(request, response);
                     break;
@@ -47,7 +50,7 @@ public class ControllerCliente extends HttpServlet {
                     inserirCliente(request, response);
                     break;
 
-                //read
+                // read
                 case "/list":
                     listarClientes(request, response);
                     break;
@@ -58,7 +61,7 @@ public class ControllerCliente extends HttpServlet {
                     procuraCliente(request, response);
                     break;
 
-                //update
+                // update
                 case "/editar":
                     editarClienteForm(request, response);
                     break;
@@ -66,11 +69,10 @@ public class ControllerCliente extends HttpServlet {
                     atualizarCliente(request, response);
                     break;
 
-                //deletar
+                // deletar
                 case "/deletar":
                     deletarCliente(request, response);
                     break;
-
 
                 default:
                     paginaInicial(request, response);
@@ -81,26 +83,25 @@ public class ControllerCliente extends HttpServlet {
         }
     }
 
-
-    
     // Página inicial
-    private void paginaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/opcoesCliente.jsp");
+    private void paginaInicial(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/opcoesCliente.jsp");
         dispatcher.forward(request, response);
     }
-    
 
-    
     // Funções de CREATE
 
     // apresenta formulário de criação de cliente
-    private void novoClienteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void novoClienteForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/novoCliente.jsp");
         dispatcher.forward(request, response);
     }
 
     // insere cliente no banco de dados
-    private void inserirCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void inserirCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
@@ -109,72 +110,75 @@ public class ControllerCliente extends HttpServlet {
         String cpf = request.getParameter("cpf");
         Date dataNascimento = Date.valueOf(request.getParameter("dataNascimento"));
 
-        Cliente novoCliente = new Cliente(nome, email, senha, telefone, sexo, cpf, dataNascimento);
+        Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
         dao.insert(novoCliente);
         response.sendRedirect("list");
     }
 
-
-
     // Funções de READ
 
     // Apresenta todos os clientes
-    private void listarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listarClientes(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         List<Cliente> listaCliente = dao.getAll();
-        
-        /* TESTE 
-		for(Cliente pessoa : listaCliente){
-			System.out.println(pessoa.getDataNascimento());
-		}
-		*/
-		
+
+        /*
+         * TESTE
+         * for(Cliente pessoa : listaCliente){
+         * System.out.println(pessoa.getDataNascimento());
+         * }
+         */
+
         request.setAttribute("listaCliente", listaCliente);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta webapp é a ''raiz''
+        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
+        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLista.jsp");
-		dispatcher.forward(request, response);
-		
+        dispatcher.forward(request, response);
+
     }
-    
+
     // apresenta formulário de busca de cliente
-    private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	// Teste de conexão: System.out.println("cade a pagina fi");
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaCliente.jsp");
+    private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Teste de conexão: System.out.println("cade a pagina fi");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaCliente.jsp");
         dispatcher.forward(request, response);
     }
-    
-    
+
     // procura cliente pelo seu ID no banco
-    private void procuraCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	String idCliente = request.getParameter("id");
-    	if(idCliente != null) {
-    		try {
-                long id = Long.parseLong(idCliente); 
-        		Cliente cliente = dao.get(id);
-        		
-        		if(cliente != null) {
-        			request.setAttribute("clienteEspecifico", cliente);
-        			RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteEspecifico.jsp");
-        			dispatcher.forward(request, response);
-        		}
-        		
-        		else {
-                    String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido", StandardCharsets.UTF_8.toString());
+    private void procuraCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idCliente = request.getParameter("id");
+        if (idCliente != null) {
+            try {
+                long id = Long.parseLong(idCliente);
+                Cliente cliente = dao.get(id);
+
+                if (cliente != null) {
+                    request.setAttribute("clienteEspecifico", cliente);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteEspecifico.jsp");
+                    dispatcher.forward(request, response);
+                }
+
+                else {
+                    String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido",
+                            StandardCharsets.UTF_8.toString());
                     response.sendRedirect(request.getContextPath() + "/buscaCliente.jsp?error=" + errorMessage);
-        		}
-    		}
-    		
-    		catch (RuntimeException | IOException | ServletException e) {
+                }
+            }
+
+            catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);
             }
-    	}
+        }
     }
-
-
 
     // Funções de UPDATE
 
-    // apresenta formulário de edição de cliente com informações referentes ao seu id
-    private void editarClienteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // apresenta formulário de edição de cliente com informações referentes ao seu
+    // id
+    private void editarClienteForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         Cliente clienteExistente = dao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/editarCliente.jsp");
@@ -183,7 +187,8 @@ public class ControllerCliente extends HttpServlet {
     }
 
     // atualiza informações de cliente no banco de dados
-    private void atualizarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
@@ -193,23 +198,21 @@ public class ControllerCliente extends HttpServlet {
         String cpf = request.getParameter("cpf");
         String dataNascimento = request.getParameter("dataNascimento");
 
-        Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf, java.sql.Date.valueOf(dataNascimento));
+        Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf,
+                java.sql.Date.valueOf(dataNascimento));
         dao.update(clienteAtualizado);
         response.sendRedirect("list");
     }
 
-
-    
-
-
     // Funções de DELETE
 
     // deleta cliente do banco de dados
-    private void deletarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deletarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         dao.delete(id);
+        // redireciona para a pagina em cliente/list
         response.sendRedirect("list");
     }
-    
-    
+
 }

@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,33 +8,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Cliente;
+import domain.Locadora;
 
-public class ClienteDAO extends GenericDAO {
-
+public class LocadaraDAO extends GenericDAO {
     // CREATE
-    public Boolean insert(Cliente cliente) {
+    public Boolean insert(Locadora Locadora) {
 
-        String sql = "INSERT INTO cliente (email, senha, nome, telefone, sexo, cpf, dataNascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO locadora (email, senha, nome, cnpj, cidade) VALUES (?, ?, ?, ?, ?)";
+
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
             ;
-            Boolean existe = this.getByCpf(cliente.getCpf()) != null || this.get(cliente.getEmail()) != null;
+            Boolean existe = this.getByCnpj(Locadora.getCnpj()) != null || this.get(Locadora.getEmail()) != null;
             if (existe) {
                 statement.close();
                 con.close();
                 return false;
             }
-
             statement = con.prepareStatement(sql);
-            statement.setString(1, cliente.getEmail());
-            statement.setString(2, cliente.getSenha());
-            statement.setString(3, cliente.getNome());
-            statement.setString(4, cliente.getTelefone());
-            statement.setString(5, cliente.getSexo());
-            statement.setString(6, cliente.getCpf());
-            statement.setDate(7, cliente.getDataNascimento());
+            statement.setString(1, Locadora.getEmail());
+            statement.setString(2, Locadora.getSenha());
+            statement.setString(3, Locadora.getNome());
+            statement.setString(4, Locadora.getCnpj());
+            statement.setString(5, Locadora.getCidade());
+
             statement.executeUpdate();
 
             statement.close();
@@ -49,10 +46,10 @@ public class ClienteDAO extends GenericDAO {
     }
 
     // READ ALL
-    public List<Cliente> getAll() {
+    public List<Locadora> getAll() {
 
-        List<Cliente> listaClientes = new ArrayList<>();
-        String sql = "SELECT * from cliente";
+        List<Locadora> listaLocadoras = new ArrayList<>();
+        String sql = "SELECT * from locadora";
 
         try {
             Connection con = this.getConnection();
@@ -60,22 +57,21 @@ public class ClienteDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
+
                 Long id = resultSet.getLong("id");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String cpf = resultSet.getString("cpf");
-                Date dataNascimento = resultSet.getDate("dataNascimento");
+                String cidade = resultSet.getString("cidade");
+                String cnpj = resultSet.getString("cnpj");
 
-                Cliente cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
-                listaClientes.add(cliente);
+                Locadora Locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
+                listaLocadoras.add(Locadora);
             }
 
             // teste de debug
-            // listaClientes.forEach(cliente -> {
-            // System.out.println(cliente.getDataNascimento() + " " + cliente.getNome());
+            // listaLocadoras.forEach(Locadora -> {
+            // System.out.println(Locadora.getDataNascimento() + " " + Locadora.getNome());
             // });
 
             resultSet.close();
@@ -84,13 +80,13 @@ public class ClienteDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaClientes;
+        return listaLocadoras;
     }
 
     // READ BY ID
-    public Cliente get(Long id) {
-        String sql = "SELECT * from cliente where id = ?";
-        Cliente cliente = null;
+    public Locadora get(Long id) {
+        String sql = "SELECT * from locadora where id = ?";
+        Locadora Locadora = null;
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
@@ -98,15 +94,14 @@ public class ClienteDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String cpf = resultSet.getString("cpf");
-                Date dataNascimento = resultSet.getDate("dataNascimento");
+                String cidade = resultSet.getString("cidade");
+                String cnpj = resultSet.getString("cnpj");
 
-                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
+                Locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
             }
 
             resultSet.close();
@@ -117,13 +112,13 @@ public class ClienteDAO extends GenericDAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cliente;
+        return Locadora;
     }
 
-    // get por nome
-    public Cliente get(String email) {
-        String sql = "SELECT * from cliente where email = ?";
-        Cliente cliente = null;
+    // Get by email
+    public Locadora get(String email) {
+        String sql = "SELECT * from locadora where email = ?";
+        Locadora Locadora = null;
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
@@ -134,12 +129,10 @@ public class ClienteDAO extends GenericDAO {
                 Long id = resultSet.getLong("id");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String cpf = resultSet.getString("cpf");
-                Date dataNascimento = resultSet.getDate("dataNascimento");
+                String cidade = resultSet.getString("cidade");
+                String cnpj = resultSet.getString("cnpj");
 
-                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
+                Locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
             }
 
             resultSet.close();
@@ -150,28 +143,27 @@ public class ClienteDAO extends GenericDAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cliente;
+        return Locadora;
     }
 
-    public Cliente getByCpf(String cpf) {
-        String sql = "SELECT * from cliente where cpf = ?";
-        Cliente cliente = null;
+    // Get by cnpj
+    public Locadora getByCnpj(String cnpj) {
+        String sql = "SELECT * from locadora where cnpj = ?";
+        Locadora Locadora = null;
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, cpf);
+            statement.setString(1, cnpj);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
+                String cidade = resultSet.getString("cidade");
                 String email = resultSet.getString("email");
-                Date dataNascimento = resultSet.getDate("dataNascimento");
 
-                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
+                Locadora = new Locadora(id, senha, nome, cidade, email, cnpj);
             }
 
             resultSet.close();
@@ -182,23 +174,21 @@ public class ClienteDAO extends GenericDAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cliente;
+        return Locadora;
     }
 
     // UPDATE
-    public void update(Cliente cliente) {
-        String sql = "UPDATE cliente SET email = ?, senha = ?, nome = ?, telefone = ?, sexo = ?, cpf = ?, dataNascimento = ? WHERE id = ?";
+    public void update(Locadora locadora) {
+        String sql = "UPDATE locadora SET email = ?, senha = ?, nome = ?, cnpj = ?, cidade = ? WHERE id = ?";
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, cliente.getEmail());
-            statement.setString(2, cliente.getSenha());
-            statement.setString(3, cliente.getNome());
-            statement.setString(4, cliente.getTelefone());
-            statement.setString(5, cliente.getSexo());
-            statement.setString(6, cliente.getCpf());
-            statement.setDate(7, new java.sql.Date(cliente.getDataNascimento().getTime()));
-            statement.setLong(8, cliente.getId());
+            statement.setString(1, locadora.getEmail());
+            statement.setString(2, locadora.getSenha());
+            statement.setString(3, locadora.getNome());
+            statement.setString(4, locadora.getCnpj());
+            statement.setString(5, locadora.getCidade());
+            statement.setLong(6, locadora.getId());
 
             statement.executeUpdate();
             statement.close();
@@ -210,7 +200,7 @@ public class ClienteDAO extends GenericDAO {
 
     // DELETE
     public void delete(Long id) {
-        String sql = "DELETE FROM cliente where id = ?";
+        String sql = "DELETE FROM locadora where id = ?";
 
         try {
             Connection con = this.getConnection();
@@ -227,5 +217,4 @@ public class ClienteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-
 }
