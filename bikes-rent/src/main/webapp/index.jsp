@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+        <fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+        <fmt:setBundle basename="message" />
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -20,9 +24,9 @@
         <div class="text-center text-white">
             <h1 class="text-6xl font-elegant mb-16">Bike Rent System</h1>
             <div class="space-x-4 mb-8">
-                <a href="cliente/" class="text-2xl hover:text-blue-300 transition duration-300">Clientes</a>
-                <a href="locadora/" class="text-2xl hover:text-blue-300 transition duration-300">Locadoras</a>
-                <a href="locacao/" class="text-2xl hover:text-blue-300 transition duration-300">Locação</a>
+                <a href="cliente/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="clientes" /></a>
+                <a href="locadora/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locadoras" /></a>
+                <a href="locacoes/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locacoes" /></a>
             </div>
         </div>
     </div>
