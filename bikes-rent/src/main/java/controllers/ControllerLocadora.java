@@ -160,7 +160,8 @@ public class ControllerLocadora extends HttpServlet {
                 else {
                     String errorMessage = URLEncoder.encode("Locadora não encontrada. ID não reconhecido",
                             StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/locadoraView/buscaLocadora.jsp?error=" + errorMessage);
+                    response.sendRedirect(
+                            request.getContextPath() + "/locadoraView/buscaLocadora.jsp?error=" + errorMessage);
                 }
             }
 
@@ -183,15 +184,13 @@ public class ControllerLocadora extends HttpServlet {
         String Cidade = request.getParameter("cidade");
         try {
             List<Locadora> Locadoras = dao.getByCidade(Cidade);
-                    request.setAttribute("listaLocadorasCidade", Locadoras);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraCidadeLista.jsp");
-                    dispatcher.forward(request, response);
-            }
-
-            catch (RuntimeException | IOException | ServletException e) {
-                throw new ServletException(e);
-            }
+            request.setAttribute("listaLocadorasCidade", Locadoras);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraCidadeLista.jsp");
+            dispatcher.forward(request, response);
         }
 
-
+        catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e);
+        }
+    }
 }

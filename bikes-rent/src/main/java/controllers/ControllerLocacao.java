@@ -56,17 +56,17 @@ public class ControllerLocacao extends HttpServlet {
                 case "/list":
                     listarLocacoes(request, response);
                     break;
-                /* 
-                case "/buscaLocacaoByCPF":
-                    listarLocacoesByCPF(request, response);
-                    break;
-                */
+                /*
+                 * case "/buscaLocacaoByCPF":
+                 * listarLocacoesByCPF(request, response);
+                 * break;
+                 */
 
-                /* 
-                case "/buscaLocacaoByCNPJ":
-                    listarLocacoesByCNPJ(request, response);
-                    break;
-                */
+                /*
+                 * case "/buscaLocacaoByCNPJ":
+                 * listarLocacoesByCNPJ(request, response);
+                 * break;
+                 */
                 case "/buscarLocacao":
                     paginaBuscarLocacao(request, response);
                     break;
@@ -124,8 +124,8 @@ public class ControllerLocacao extends HttpServlet {
 
         Boolean funcionou = dao.insert(novaLocacao);
         if (funcionou) {
-            response.sendRedirect("list"); 
-        }else {
+            response.sendRedirect("list");
+        } else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",
                     StandardCharsets.UTF_8.toString());
             response.sendRedirect(request.getContextPath() + "/locacaoView/locacao/list?error=" + errorMessage);
@@ -147,35 +147,41 @@ public class ControllerLocacao extends HttpServlet {
 
     }
 
-    /* falta
-    // Apresenta todas as Locações por CPF
-    private void listarLocacoesByCPF(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Locacao> listaLocacao = dao.getAll();
+    /*
+     * falta
+     * // Apresenta todas as Locações por CPF
+     * private void listarLocacoesByCPF(HttpServletRequest request,
+     * HttpServletResponse response)
+     * throws ServletException, IOException {
+     * List<Locacao> listaLocacao = dao.getAll();
+     * 
+     * request.setAttribute("listaLocacao", listaLocacao);
+     * // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
+     * // webapp é a ''raiz''
+     * RequestDispatcher dispatcher =
+     * request.getRequestDispatcher("/locacaoLista.jsp");
+     * dispatcher.forward(request, response);
+     * 
+     * }
+     */
 
-        request.setAttribute("listaLocacao", listaLocacao);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoLista.jsp");
-        dispatcher.forward(request, response);
-
-    }
-    */
-
-    /* falta
-    // Apresenta todas as Locações por CNPJ
-    private void listarLocacoesByCNPJ(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Locacao> listaLocacao = dao.getAll();
-
-        request.setAttribute("listaLocacao", listaLocacao);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoLista.jsp");
-        dispatcher.forward(request, response);
-
-    }
-    */
+    /*
+     * falta
+     * // Apresenta todas as Locações por CNPJ
+     * private void listarLocacoesByCNPJ(HttpServletRequest request,
+     * HttpServletResponse response)
+     * throws ServletException, IOException {
+     * List<Locacao> listaLocacao = dao.getAll();
+     * 
+     * request.setAttribute("listaLocacao", listaLocacao);
+     * // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
+     * // webapp é a ''raiz''
+     * RequestDispatcher dispatcher =
+     * request.getRequestDispatcher("/locacaoLista.jsp");
+     * dispatcher.forward(request, response);
+     * 
+     * }
+     */
 
     // apresenta formulário de busca de Locadora
     private void paginaBuscarLocacao(HttpServletRequest request, HttpServletResponse response)
@@ -201,7 +207,8 @@ public class ControllerLocacao extends HttpServlet {
                 } else {
                     String errorMessage = URLEncoder.encode("Locadora não encontrada. ID não reconhecido",
                             StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/locacaoView/buscaLocacao.jsp?error=" + errorMessage);
+                    response.sendRedirect(
+                            request.getContextPath() + "/locacaoView/buscaLocacao.jsp?error=" + errorMessage);
                 }
             } catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);

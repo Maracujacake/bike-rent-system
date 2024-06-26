@@ -148,7 +148,6 @@ public class LocacaoDAO extends GenericDAO {
             statement.setString(3, dataHora);
             statement.setLong(4, locacao.getId());
 
-
             statement.executeUpdate();
             statement.close();
             con.close();
@@ -157,24 +156,24 @@ public class LocacaoDAO extends GenericDAO {
         }
     }
 
-        // DELETE
-        public void delete(Long id) {
-            String sql = "DELETE FROM locacao where id = ?";
-    
-            try {
-                Connection con = this.getConnection();
-                PreparedStatement statement = con.prepareStatement(sql);
-    
-                statement.setLong(1, id);
-                statement.executeUpdate();
-    
-                statement.close();
-                con.close();
-            }
-    
-            catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+    // DELETE
+    public void delete(Long id) {
+        String sql = "DELETE FROM locacao where id = ?";
+
+        try {
+            Connection con = this.getConnection();
+            PreparedStatement statement = con.prepareStatement(sql);
+
+            statement.setLong(1, id);
+            statement.executeUpdate();
+
+            statement.close();
+            con.close();
         }
+
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
