@@ -21,8 +21,11 @@ public class GenericDAO {
 
         // return DriverManager.getConnection(url, "root", "root");
         // configurar usuario e senha conforme o banco
-        String user = "root";
-        String password = "root";
+        
+        //String user = "root";
+        //String password = "root";
+        String user = "chris";
+        String password = "1234";
         return DriverManager.getConnection(url, user, password);
     }
 }

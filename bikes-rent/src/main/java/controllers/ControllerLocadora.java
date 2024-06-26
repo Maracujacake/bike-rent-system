@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.LocadaraDAO;
+import dao.LocadoraDAO;
 import domain.Locadora;
 
 @WebServlet(urlPatterns = "/locadora/*")
 public class ControllerLocadora extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private LocadaraDAO dao;
+    private LocadoraDAO dao;
 
     @Override
     public void init() {
-        dao = new LocadaraDAO();
+        dao = new LocadoraDAO();
     }
 
     @Override
@@ -136,7 +136,7 @@ public class ControllerLocadora extends HttpServlet {
         request.setAttribute("listaLocadora", listaLocadora);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/LocadoraLista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraLista.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -160,7 +160,7 @@ public class ControllerLocadora extends HttpServlet {
 
                 if (Locadora != null) {
                     request.setAttribute("LocadoraEspecifico", Locadora);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/LocadoraEspecifico.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraEspecifico.jsp");
                     dispatcher.forward(request, response);
                 }
 

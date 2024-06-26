@@ -8,7 +8,7 @@
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
             <!-- Atualize o caminho -->
-            <title>Lista de Locadorass</title>
+            <title>Lista de Locadoras</title>
         </head>
 
         <body class="bg-gray-100">
