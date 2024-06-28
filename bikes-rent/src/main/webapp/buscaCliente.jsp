@@ -12,6 +12,7 @@
     <title><fmt:message key="cliente.get" /></title>
 </head>
 
+
 <body class="bg-gray-100">
 
                             <!-- FORMULÁRIO QUE PERMITE A BUSCA DO CLIENTE PELO ID -->
