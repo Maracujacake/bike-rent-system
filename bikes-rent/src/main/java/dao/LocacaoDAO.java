@@ -16,7 +16,7 @@ public class LocacaoDAO extends GenericDAO {
     // CREATE
     public Boolean insert(Locacao locacao) throws SQLException {
 
-        String sql = "INSERT INTO locacao (cfCliente, cnpjLocadora, dataHorario) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO locacao (cpfCliente, cnpjLocadora, dataHorario) VALUES (?, ?, ?)";
 
         try {
             Connection con = this.getConnection();
@@ -80,7 +80,7 @@ public class LocacaoDAO extends GenericDAO {
 
     // READ BY ID
     public Locacao getByID(Long Id) {
-        String sql = "SELECT * from locadora where dataHorario = ?";
+        String sql = "SELECT * from locacao where id = ?";
         Locacao locacao = null;
         try {
             Connection con = this.getConnection();
@@ -109,7 +109,7 @@ public class LocacaoDAO extends GenericDAO {
 
     // READ BY DATAHORARIO
     public Locacao getBydataHorario(LocalDateTime diaHora) {
-        String sql = "SELECT * from locadora where dataHorario = ?";
+        String sql = "SELECT * from locacao where dataHorario = ?";
         Locacao locacao = null;
         try {
             Connection con = this.getConnection();

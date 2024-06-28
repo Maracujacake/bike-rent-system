@@ -27,6 +27,12 @@
                             class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Buscar
                             Locadora por ID</a>
                     </li>
+
+                    <li>
+                        <a href="${pageContext.request.contextPath}/locadora/buscaLocadoraByCidade"
+                            class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Buscar
+                            Locadora por cidade</a>
+                    </li>
                 </ul>
             </div>
         </div>

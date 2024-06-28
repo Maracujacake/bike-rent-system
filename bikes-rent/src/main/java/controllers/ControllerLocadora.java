@@ -58,6 +58,12 @@ public class ControllerLocadora extends HttpServlet {
                 case "/procurar":
                     procuraLocadora(request, response);
                     break;
+                case "/buscaLocadoraByCidade":
+                    buscaLocadoraByCidade(request, response);
+                    break;
+                case "/procurarByCidade":
+                    procuraLocadoraByCidade(request, response);
+                    break;
 
                 // update
                 case "/editar":
@@ -176,6 +182,31 @@ public class ControllerLocadora extends HttpServlet {
             }
         }
     }
+
+    // apresenta formulário de busca de Locadora por cidade
+    private void buscaLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaLocadoraByCidade.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    // busca locadora por cidade DE FATO no banco
+    private void procuraLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String Cidade = request.getParameter("cidade");
+        try {
+            List<Locadora> Locadoras = dao.getByCidade(Cidade);
+                    request.setAttribute("listaLocadorasCidade", Locadoras);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraCidadeLista.jsp");
+                    dispatcher.forward(request, response);
+            }
+
+            catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+        }
+
+
 
     // Funções de UPDATE
 

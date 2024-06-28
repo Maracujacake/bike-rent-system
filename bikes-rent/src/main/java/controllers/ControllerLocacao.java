@@ -115,9 +115,9 @@ public class ControllerLocacao extends HttpServlet {
     // insere Locadora no banco de dados
     private void inserirLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        String cpfCliente = request.getParameter("cpfCliente");
-        String cnpjLocadora = request.getParameter("cnpjLocadora");
-        String dataHora = request.getParameter("dataHora");
+        String cpfCliente = request.getParameter("cpf");
+        String cnpjLocadora = request.getParameter("cnpj");
+        String dataHora = request.getParameter("dataHorario");
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
 
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
