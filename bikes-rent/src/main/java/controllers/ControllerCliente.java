@@ -31,12 +31,14 @@ public class ControllerCliente extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getPathInfo();
         if (action == null) {
             action = " ";
@@ -96,30 +98,37 @@ public class ControllerCliente extends HttpServlet {
                 default:
                     paginaInicial(request, response);
                     break;
+
             }
-        } catch (RuntimeException | IOException | ServletException e) {
+        }
+
+        catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
     }
 
     // Cliente passa o CPF para usar na busca de locações
-    private void clienteCPFSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void clienteCPFSearch(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/formCPFCliente.jsp");
         dispatcher.forward(request, response);
     }
 
     // Apresenta todas as locações de um cliente dado o cpf
-    private void listarClienteLocacaoByCPF(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listarClienteLocacaoByCPF(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String cpf = request.getParameter("cpf");
         List<Locacao> listaCliente = dao.getLocacaoByCPF(cpf);
         request.setAttribute("listaCliente", listaCliente);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta webapp é a ''raiz''
+        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
+        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/locacoesCliente.jsp");
         dispatcher.forward(request, response);
 
     }
 
-    private void editarLocacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void editarLocacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String idLocacao = request.getParameter("id");
         if (idLocacao != null) {
             try {
@@ -128,7 +137,8 @@ public class ControllerCliente extends HttpServlet {
 
                 if (locacao != null) {
                     request.setAttribute("locacao", locacao);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/editarLocacao.jsp");
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("/clienteLogado/clienteView/editarLocacao.jsp");
                     dispatcher.forward(request, response);
                 } else {
                     response.sendRedirect("Locacao não encontrada. ID não reconhecido");
@@ -183,7 +193,6 @@ public class ControllerCliente extends HttpServlet {
         response.sendRedirect("list");
     }
 
-    // Funções de READ
     // Apresenta todos os clientes
     private void listarClientes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -195,10 +204,11 @@ public class ControllerCliente extends HttpServlet {
          * System.out.println(pessoa.getDataNascimento());
          * }
          */
+
         request.setAttribute("listaCliente", listaCliente);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/clienteLista.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -206,8 +216,8 @@ public class ControllerCliente extends HttpServlet {
     // apresenta formulário de busca de cliente
     private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Teste de conexão: System.out.println("cade a pagina fi");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaCliente.jsp");
+        // System.out.println("cade a pagina fi"); Teste de conexão
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/buscaCliente.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -222,7 +232,34 @@ public class ControllerCliente extends HttpServlet {
 
                 if (cliente != null) {
                     request.setAttribute("clienteEspecifico", cliente);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteEspecifico.jsp");
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("/clienteLogado/clienteView/clienteEspecifico.jsp");
+                    dispatcher.forward(request, response);
+                }
+
+                else {
+                    response.sendRedirect("Cliente não encontrado. ID não reconhecido");
+                }
+            }
+
+            catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+        }
+    }
+
+    private void paginaEditarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idCliente = request.getParameter("id");
+        if (idCliente != null) {
+            try {
+                long id = Long.parseLong(idCliente);
+                Cliente cliente = dao.get(id);
+
+                if (cliente != null) {
+                    request.setAttribute("clienteEspecifico", cliente);
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("/clienteLogado/clienteView/editarCliente.jsp");
                     dispatcher.forward(request, response);
                 } else {
                     String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido",
