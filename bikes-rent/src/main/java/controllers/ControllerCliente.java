@@ -235,11 +235,13 @@ public class ControllerCliente extends HttpServlet {
                     RequestDispatcher dispatcher = request
                             .getRequestDispatcher("/clienteLogado/clienteView/clienteEspecifico.jsp");
                     dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("Locacao não encontrada. ID não reconhecido");
                 }
 
-                else {
-                    response.sendRedirect("Cliente não encontrado. ID não reconhecido");
-                }
+                // else {
+                // response.sendRedirect("Cliente não encontrado. ID não reconhecido");
+                // }
             }
 
             catch (RuntimeException | IOException | ServletException e) {
