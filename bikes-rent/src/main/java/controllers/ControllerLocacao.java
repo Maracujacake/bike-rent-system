@@ -100,7 +100,7 @@ public class ControllerLocacao extends HttpServlet {
     // Página inicial
     private void paginaInicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/opcoesLocacao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/opcoesLocacao.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -108,7 +108,7 @@ public class ControllerLocacao extends HttpServlet {
     // apresenta formulário de criação de Locadora
     private void novoLocacaoForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/novoLocacao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/novoLocacao.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -128,7 +128,7 @@ public class ControllerLocacao extends HttpServlet {
         }else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",
                     StandardCharsets.UTF_8.toString());
-            response.sendRedirect(request.getContextPath() + "/locacao/list?error=" + errorMessage);
+            response.sendRedirect(request.getContextPath() + "/locacaoView/locacao/list?error=" + errorMessage);
         }
 
     }
@@ -142,7 +142,7 @@ public class ControllerLocacao extends HttpServlet {
         request.setAttribute("listaLocacao", listaLocacao);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoLista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/locacaoLista.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -181,7 +181,7 @@ public class ControllerLocacao extends HttpServlet {
     private void paginaBuscarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Teste de conexão: System.out.println("cade a pagina fi");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaLocacao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/buscaLocacao.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -196,12 +196,12 @@ public class ControllerLocacao extends HttpServlet {
 
                 if (locacao != null) {
                     request.setAttribute("LocadoraEspecifico", locacao);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoEspecifica.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/locacaoEspecifica.jsp");
                     dispatcher.forward(request, response);
                 } else {
                     String errorMessage = URLEncoder.encode("Locadora não encontrada. ID não reconhecido",
                             StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/buscaLocacao.jsp?error=" + errorMessage);
+                    response.sendRedirect(request.getContextPath() + "/locacaoView/buscaLocacao.jsp?error=" + errorMessage);
                 }
             } catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);
@@ -216,7 +216,7 @@ public class ControllerLocacao extends HttpServlet {
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         Locacao locacaoExistente = dao.getByID(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/editarLocacao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/editarLocacao.jsp");
         request.setAttribute("Locadora", locacaoExistente);
         dispatcher.forward(request, response);
     }
