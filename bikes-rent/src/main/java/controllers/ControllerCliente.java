@@ -29,12 +29,14 @@ public class ControllerCliente extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getPathInfo();
         if (action == null) {
             action = " ";
@@ -70,30 +72,37 @@ public class ControllerCliente extends HttpServlet {
                 default:
                     paginaInicial(request, response);
                     break;
+
             }
-        } catch (RuntimeException | IOException | ServletException e) {
+        }
+
+        catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
     }
 
     // Cliente passa o CPF para usar na busca de locações
-    private void clienteCPFSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void clienteCPFSearch(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/formCPFCliente.jsp");
         dispatcher.forward(request, response);
     }
 
     // Apresenta todas as locações de um cliente dado o cpf
-    private void listarClienteLocacaoByCPF(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listarClienteLocacaoByCPF(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String cpf = request.getParameter("cpf");
         List<Locacao> listaCliente = dao.getLocacaoByCPF(cpf);
         request.setAttribute("listaCliente", listaCliente);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta webapp é a ''raiz''
+        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
+        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/locacoesCliente.jsp");
         dispatcher.forward(request, response);
 
     }
 
-    private void editarLocacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void editarLocacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String idLocacao = request.getParameter("id");
         if (idLocacao != null) {
             try {
@@ -102,7 +111,8 @@ public class ControllerCliente extends HttpServlet {
 
                 if (locacao != null) {
                     request.setAttribute("locacao", locacao);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/editarLocacao.jsp");
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("/clienteLogado/clienteView/editarLocacao.jsp");
                     dispatcher.forward(request, response);
                 } else {
                     response.sendRedirect("Locacao não encontrada. ID não reconhecido");

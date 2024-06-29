@@ -30,7 +30,9 @@ public class FilterCliente implements Filter {
         }
     }
 
-    public void init(FilterConfig fConfig) throws ServletException {}
+    public void init(FilterConfig fConfig) throws ServletException {
+    }
 
-    public void destroy() {}
+    public void destroy() {
+    }
 }
