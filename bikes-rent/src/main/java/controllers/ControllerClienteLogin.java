@@ -37,7 +37,7 @@ public class ControllerClienteLogin extends HttpServlet {
                         session.removeAttribute("redirectTo");
                         response.sendRedirect(request.getContextPath() + redirectTo);
                     } else {
-                        response.sendRedirect(request.getContextPath() + "/cliente/list");
+                        response.sendRedirect(request.getContextPath() + "/cliente/");
                     }
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login/loginCliente.jsp");

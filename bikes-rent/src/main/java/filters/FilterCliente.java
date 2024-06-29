@@ -24,7 +24,6 @@ public class FilterCliente implements Filter {
 
         if (session == null || session.getAttribute("email") == null) {
             session = httpRequest.getSession();
-            session.setAttribute("redirectTo", httpRequest.getRequestURI());
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login/loginCliente.jsp");
         } else {
             chain.doFilter(request, response);

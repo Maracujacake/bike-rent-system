@@ -12,18 +12,20 @@
 
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo ao Sistema de Clientes</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a)</h2>
             <ul class="space-y-4">
                 <li>
-                    <a href="${pageContext.request.contextPath}/cliente/list"
-                        class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Listar Todos
-                        os Clientes</a>
+                    <!-- manda para formulário de CPF para busca de locações -->
+                    <a href="${pageContext.request.contextPath}/cliente/buscaCPF"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Listar suas locações</a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}/cliente/buscarCliente"
-                        class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Buscar
-                        Cliente por ID</a>
+                    <!-- manda para formulário de criação de locação -->
+                    <a href="${pageContext.request.contextPath}/locacao/novo"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Adicionar Locação</a>
                 </li>
             </ul>
         </div>
