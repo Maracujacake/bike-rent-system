@@ -11,6 +11,7 @@ execute com mvn clean package tomcat7:run-war
 - - criar um adminController com as funções antigas de cliente, afinal, cliente não pode ver informações de outros clientes, apenas admin pode
 - - esse adminController deve possuir as funções de locadora também que não devem ser acessíveis a locadora, ex: ver as locações de outras locadoras
 - - retirar o código antigo de clienteController e deixar somente no adminController
+- - adicionar instâncias ao arquivo .sql para o banco de dados já iniciar populado
 
 <hr>
 
