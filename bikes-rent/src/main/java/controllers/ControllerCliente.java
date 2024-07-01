@@ -1,8 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,30 +65,6 @@ public class ControllerCliente extends HttpServlet {
                     break;
                 case "/inserir":
                     inserirCliente(request, response);
-                    break;
-
-                // read
-                case "/list":
-                    listarClientes(request, response);
-                    break;
-                case "/buscarCliente":
-                    paginaBuscarCliente(request, response);
-                    break;
-                case "/procurar":
-                    procuraCliente(request, response);
-                    break;
-
-                // update
-                case "/editar":
-                    editarClienteForm(request, response);
-                    break;
-                case "/atualizar":
-                    atualizarCliente(request, response);
-                    break;
-
-                // deletar
-                case "/deletar":
-                    deletarCliente(request, response);
                     break;
 
                 default:
@@ -163,7 +137,7 @@ public class ControllerCliente extends HttpServlet {
     // apresenta formulário de criação de cliente
     private void novoClienteForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/novoCliente.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/novoCliente.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -180,99 +154,7 @@ public class ControllerCliente extends HttpServlet {
 
         Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
         dao.insert(novoCliente);
-        response.sendRedirect("list");
-    }
-
-    // Funções de READ
-    // Apresenta todos os clientes
-    private void listarClientes(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Cliente> listaCliente = dao.getAll();
-
-        /*
-         * TESTE
-         * for(Cliente pessoa : listaCliente){
-         * System.out.println(pessoa.getDataNascimento());
-         * }
-         */
-        request.setAttribute("listaCliente", listaCliente);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLista.jsp");
-        dispatcher.forward(request, response);
-
-    }
-
-    // apresenta formulário de busca de cliente
-    private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Teste de conexão: System.out.println("cade a pagina fi");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaCliente.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    // procura cliente pelo seu ID no banco
-    private void procuraCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String idCliente = request.getParameter("id");
-        if (idCliente != null) {
-            try {
-                long id = Long.parseLong(idCliente);
-                Cliente cliente = dao.get(id);
-
-                if (cliente != null) {
-                    request.setAttribute("clienteEspecifico", cliente);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteEspecifico.jsp");
-                    dispatcher.forward(request, response);
-                } else {
-                    String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido",
-                            StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/buscaCliente.jsp?error=" + errorMessage);
-                }
-            } catch (RuntimeException | IOException | ServletException e) {
-                throw new ServletException(e);
-            }
-        }
-    }
-
-    // Funções de UPDATE
-    // apresenta formulário de edição de cliente com informações referentes ao seu
-    // id
-    private void editarClienteForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        Cliente clienteExistente = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/editarCliente.jsp");
-        request.setAttribute("cliente", clienteExistente);
-        dispatcher.forward(request, response);
-    }
-
-    // atualiza informações de cliente no banco de dados
-    private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String telefone = request.getParameter("telefone");
-        String sexo = request.getParameter("sexo");
-        String cpf = request.getParameter("cpf");
-        String dataNascimento = request.getParameter("dataNascimento");
-
-        Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf,
-                java.sql.Date.valueOf(dataNascimento));
-        dao.update(clienteAtualizado);
-        response.sendRedirect("list");
-    }
-
-    // Funções de DELETE
-    // deleta cliente do banco de dados
-    private void deletarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        dao.delete(id);
-        // redireciona para a pagina em cliente/list
-        response.sendRedirect("list");
+        response.sendRedirect("");
     }
 
 }

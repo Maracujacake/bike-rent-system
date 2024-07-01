@@ -21,7 +21,7 @@
                 <c:if test="${empty clienteEspecifico}">
                     <p>Cliente não encontrado.</p>
                 </c:if>
-                <a href="${pageContext.request.contextPath}/cliente/list" class="block px-4 py-2 my-4 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Voltar para lista de clientes</a>
+                <a href="${pageContext.request.contextPath}/admin/listCliente" class="block px-4 py-2 my-4 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">Voltar para lista de clientes</a>
         </div>
     </div>
     

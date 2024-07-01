@@ -65,19 +65,6 @@ public class ControllerLocadora extends HttpServlet {
                     procuraLocadoraByCidade(request, response);
                     break;
 
-                // update
-                case "/editar":
-                    editarLocadoraForm(request, response);
-                    break;
-                case "/atualizar":
-                    atualizarLocadora(request, response);
-                    break;
-
-                // deletar
-                case "/deletar":
-                    deletarLocadora(request, response);
-                    break;
-
                 default:
                     paginaInicial(request, response);
                     break;
@@ -206,45 +193,5 @@ public class ControllerLocadora extends HttpServlet {
             }
         }
 
-
-
-    // Funções de UPDATE
-
-    // apresenta formulário de edição de Locadora com informações referentes ao seu
-    // id
-    private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        Locadora LocadoraExistente = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/editarLocadora.jsp");
-        request.setAttribute("Locadora", LocadoraExistente);
-        dispatcher.forward(request, response);
-    }
-
-    // atualiza informações de Locadora no banco de dados
-    private void atualizarLocadora(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cidade = request.getParameter("cidade");
-        String cnpj = request.getParameter("cnpj");
-
-        Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
-        dao.update(LocadoraAtualizado);
-        response.sendRedirect("list");
-    }
-
-    // Funções de DELETE
-
-    // deleta Locadora do banco de dados
-    private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        dao.delete(id);
-        // redireciona para a pagina em Locadora/list
-        response.sendRedirect("list");
-    }
 
 }
