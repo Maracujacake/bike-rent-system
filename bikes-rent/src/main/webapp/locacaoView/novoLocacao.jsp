@@ -11,10 +11,6 @@
         <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">Nova Locação</h2>
             <form action="${pageContext.request.contextPath}/locacao/inserir" method="post" class="space-y-4">
-                <div>
-                    <label for="cpf" class="block text-sm font-medium text-gray-700">CPF Cliente:</label>
-                    <input type="text" name="cpf" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                </div>
 
                 <div>
                     <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ Locadora:</label>

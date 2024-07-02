@@ -88,7 +88,7 @@ public class LocacaoDAO extends GenericDAO {
             statement.setLong(1, Id);
 
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 String cpfCliente = resultSet.getString("cpfCliente");
                 String cnpjLocadora = resultSet.getString("cnpjLocadora");
                 String diaHora = resultSet.getString("dataHorario");

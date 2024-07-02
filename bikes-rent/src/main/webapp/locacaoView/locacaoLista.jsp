@@ -21,7 +21,7 @@
                         <table class="w-full mx-auto">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="border border-gray-300 px-4 py-2">CPF Cliente</th>
+                                    <th class="border border-gray-300 px-4 py-2">ID</th>
                                     <th class="border border-gray-300 px-4 py-2">CNPJ locacao</th>
                                     <th class="border border-gray-300 px-4 py-2">Data Locação</th>
                                     <th class="border border-gray-300 px-4 py-2">Opções</th>
@@ -30,7 +30,7 @@
                             <tbody>
                                 <c:forEach var="locacao" items="${listaLocacao}">
                                     <tr class="border-b border-gray-300">
-                                        <td class="border border-gray-300 px-4 py-2">${locacao.cpfCliente}</td>
+                                        <td class="border border-gray-300 px-4 py-2">${locacao.id}</td>
                                         <td class="border border-gray-300 px-4 py-2">${locacao.cnpjLocadora}</td>
                                         <td class="border border-gray-300 px-4 py-2">${locacao.registro}</td>
                                         <td class="border border-gray-300 px-4 py-2">
@@ -51,8 +51,13 @@
                     <hr class="my-4">
 
                     <div class="flex justify-around">
-                        <a href="${pageContext.request.contextPath}/locacao/buscarlocacao"
-                            class="text-blue-500 hover:underline">Buscar locacao por ID</a>
+
+                        <a href="${pageContext.request.contextPath}"
+                        class="text-gray-500 hover:underline">Voltar à página inicial</a>
+
+                        <a href="${pageContext.request.contextPath}/locacao/buscarLocacao"
+                            class="text-blue-500 hover:underline">Buscar Locação por ID</a>
+
                         <a href="${pageContext.request.contextPath}/locacao/novo"
                             class="text-green-500 hover:underline">Adicionar locacao</a>
                     </div>

@@ -34,6 +34,8 @@ public class ControllerClienteLogin extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("email", cliente.getEmail());
                 session.setAttribute("cpf", cliente.getCpf());
+                session.setAttribute("nome", cliente.getNome());
+                session.setAttribute("role", "cliente");
                 String redirectTo = (String) session.getAttribute("redirectTo");
                 if (redirectTo != null) {
                     session.removeAttribute("redirectTo");

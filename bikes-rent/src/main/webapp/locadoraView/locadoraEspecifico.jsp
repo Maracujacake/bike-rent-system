@@ -43,6 +43,11 @@
                             class="block px-4 py-2 my-4 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
                             <fmt:message key="locadora.returnToListLocadora" />
                         </a>
+
+                        <a href="${pageContext.request.contextPath}"
+                            class="block px-4 py-2 my-4 rounded bg-gray-500 text-white font-bold hover:bg-blue-600">
+                            Voltar para a página inicial
+                        </a>
                     </div>
                 </div>
 

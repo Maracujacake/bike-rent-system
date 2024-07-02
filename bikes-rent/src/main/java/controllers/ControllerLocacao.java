@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.LocacaoDAO;
 import domain.Locacao;
+
 
 @WebServlet(urlPatterns = "/locacao/*")
 public class ControllerLocacao extends HttpServlet {
@@ -44,13 +44,7 @@ public class ControllerLocacao extends HttpServlet {
 
         try {
             switch (action) {
-                // create
-                case "/novo":
-                    novoLocacaoForm(request, response);
-                    break;
-                case "/inserir":
-                    inserirLocacao(request, response);
-                    break;
+                // criação está em cliente e em admin
 
                 // read
                 case "/list":
@@ -91,9 +85,10 @@ public class ControllerLocacao extends HttpServlet {
                     paginaInicial(request, response);
                     break;
             }
-        } catch (RuntimeException | IOException | ServletException e) {
-            throw new ServletException(e);
-        } catch (SQLException ex) {
+        } 
+        
+        catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e); 
         }
     }
 
@@ -102,35 +97,6 @@ public class ControllerLocacao extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/opcoesLocacao.jsp");
         dispatcher.forward(request, response);
-    }
-
-    // Funções de CREATE
-    // apresenta formulário de criação de Locadora
-    private void novoLocacaoForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/novoLocacao.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    // insere Locadora no banco de dados
-    private void inserirLocacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        String cpfCliente = request.getParameter("cpf");
-        String cnpjLocadora = request.getParameter("cnpj");
-        String dataHora = request.getParameter("dataHorario");
-        LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
-
-        Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
-
-        Boolean funcionou = dao.insert(novaLocacao);
-        if (funcionou) {
-            response.sendRedirect("list");
-        } else {
-            String errorMessage = URLEncoder.encode("Locacao ja existe!",
-                    StandardCharsets.UTF_8.toString());
-            response.sendRedirect(request.getContextPath() + "/locacaoView/locacao/list?error=" + errorMessage);
-        }
-
     }
 
     // Funções de READ
@@ -201,7 +167,7 @@ public class ControllerLocacao extends HttpServlet {
                 Locacao locacao = dao.getByID(id);
 
                 if (locacao != null) {
-                    request.setAttribute("LocadoraEspecifico", locacao);
+                    request.setAttribute("locacaoEspecifico", locacao);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/locacaoEspecifica.jsp");
                     dispatcher.forward(request, response);
                 } else {

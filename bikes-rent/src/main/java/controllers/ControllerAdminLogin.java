@@ -30,6 +30,7 @@ public class ControllerAdminLogin extends HttpServlet {
                 if (dao.authAdmin(email, password) != null) {
                     HttpSession session = request.getSession();
                     session.setAttribute("email", email);
+                    session.setAttribute("role", "admin");
 
                     String redirectTo = (String) session.getAttribute("redirectTo");
                     if (redirectTo != null) {

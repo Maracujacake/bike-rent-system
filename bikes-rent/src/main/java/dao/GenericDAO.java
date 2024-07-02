@@ -24,8 +24,8 @@ public class GenericDAO {
 
         // String user = "root";
         // String password = "root";
-        String user = "root";
-        String password = "root";
+        String user = "chris";
+        String password = "1234";
         return DriverManager.getConnection(url, user, password);
     }
 }

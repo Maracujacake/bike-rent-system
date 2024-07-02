@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-// tudo que estiver em /cliente/* vai passar por esse filtro
+// tudo que estiver em /admin/* vai passar por esse filtro
 @WebFilter("/admin/*")
 public class FilterAdmin implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -22,7 +22,7 @@ public class FilterAdmin implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
-        if (session == null || session.getAttribute("email") == null) {
+        if (session == null || session.getAttribute("role") == null || !"admin".equals(session.getAttribute("role")) ) {
             session = httpRequest.getSession();
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login/loginAdmin.jsp");
         } else {

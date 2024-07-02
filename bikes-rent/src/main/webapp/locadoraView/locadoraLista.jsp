@@ -77,6 +77,12 @@
                         <hr class="my-4">
 
                         <div class="flex justify-around">
+
+                            <a href="${pageContext.request.contextPath}"
+                                class="text-gray-500 hover:underline">
+                                Voltar à página inicial
+                            </a>
+
                             <a href="${pageContext.request.contextPath}/locadora/buscarLocadora"
                                 class="text-blue-500 hover:underline">
                                 <fmt:message key="locadora.getById" />
