@@ -5,6 +5,10 @@ Sistema de locação de bicicletas.
 http://localhost:8080/bikes-rent/
 execute com mvn clean package tomcat7:run-war
 
+# Configurar .env
+    - Criar arquivo .env dentro da pasta bikes-rent
+    - Adicionar campos *DB_USER*, *DB_PASSWORD*
+
 # to-dos:
 
 - ## organizar o código
