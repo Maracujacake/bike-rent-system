@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <!DOCTYPE html>
-        <html>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+            <fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+            <fmt:setBundle basename="message" />
+            <!DOCTYPE html>
+            <html>
 
-        <head>
-            <meta charset="UTF-8">
-            <script src="https://cdn.tailwindcss.com"></script>
-            <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
-            <!-- Atualize o caminho -->
-            <title>Lista de Locadoras</title>
-        </head>
+            <head>
+                <meta charset="UTF-8">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
 
-        <body class="bg-gray-100">
-            <!-- MOSTRA A LISTA DE TODOS OS locadoraS DO BANCO DE DADOS  -->
+                <!-- Atualize o caminho -->
+                <title>
+                    <fmt:message key="locadora.lista" />
+                </title>
+            </head>
 
             <div class="flex justify-center items-center h-screen">
                 <div class="max-w-4xl w-full p-8 bg-white rounded shadow-lg text-center">
@@ -52,16 +55,20 @@
                         <p>Nenhuma Locadora encontrada.</p>
                     </c:if>
 
-                    <hr class="my-4">
+                        <hr class="my-4">
 
-                    <div class="flex justify-around">
-                        <a href="${pageContext.request.contextPath}/locadora/buscarLocadora"
-                            class="text-blue-500 hover:underline">Buscar Locadora por ID</a>
-                        <a href="${pageContext.request.contextPath}/locadora/novo"
-                            class="text-green-500 hover:underline">Adicionar Locadora</a>
+                        <div class="flex justify-around">
+                            <a href="${pageContext.request.contextPath}/locadora/buscarLocadora"
+                                class="text-blue-500 hover:underline">
+                                <fmt:message key="locadora.getById" />
+                            </a>
+                            <a href="${pageContext.request.contextPath}/locadora/novo"
+                                class="text-green-500 hover:underline">
+                                <fmt:message key="locadora.add" />
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </body>
+            </body>
 
-        </html>
+            </html>

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+<fmt:setBundle basename="message" /> 
+<!DOCTYPE html>
     <html>
 
     <head>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
         <meta charset="UTF-8">
-        <title>Buscar locadora</title>
+        <title><fmt:message key="locadora.get" /></title>
     </head>
 
     <body class="bg-gray-100">
@@ -23,7 +26,7 @@
                             type="text" id="cidade" name="cidade" placeholder="Cidade da locadora">
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Buscar
+                            <fmt:message key="buscar" />
                         </button>
                     </div>
                 </form>
