@@ -12,7 +12,6 @@ execute com mvn clean package tomcat7:run-war
 # to-dos:
 
 - ## organizar o código
-- - criar um arquivo .env para o bd porque o tanso do chris não usa root root como login, mds
 
 <hr>
 
