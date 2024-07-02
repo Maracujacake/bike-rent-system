@@ -22,9 +22,9 @@
                     <p><fmt:message key="birthdate" />: ${clienteEspecifico.dataNascimento}</p>
                 </c:if>
                 <c:if test="${empty clienteEspecifico}">
-                    <p><fmt:message key="cliente.NotFound" />.</p>
+                    <p><fmt:message key="cliente.NotFound" /></p>
                 </c:if>
-                <a href="${pageContext.request.contextPath}/cliente/list" class="block px-4 py-2 my-4 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"><p><fmt:message key="cliente.returnToList" /></a>
+                <a href="${pageContext.request.contextPath}/admin/listCliente" class="block px-4 py-2 my-4 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"><fmt:message key="cliente.returnToList" /></a>
         </div>
     </div>
     

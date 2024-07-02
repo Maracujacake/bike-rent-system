@@ -2,3 +2,7 @@ bikes-rent/target/
 bikes-rent/.settings/
 *.class
 esbocoIdeais.txt
+<<<<<<< HEAD
+.env
+=======
+>>>>>>> main

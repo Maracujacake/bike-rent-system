@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.LocadaraDAO;
+import dao.LocadoraDAO;
 import domain.Locadora;
 
 @WebServlet(urlPatterns = "/locadora/*")
 public class ControllerLocadora extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private LocadaraDAO dao;
+    private LocadoraDAO dao;
 
     @Override
     public void init() {
-        dao = new LocadaraDAO();
+        dao = new LocadoraDAO();
     }
 
     @Override
@@ -58,18 +58,11 @@ public class ControllerLocadora extends HttpServlet {
                 case "/procurar":
                     procuraLocadora(request, response);
                     break;
-
-                // update
-                case "/editar":
-                    editarLocadoraForm(request, response);
+                case "/buscaLocadoraByCidade":
+                    buscaLocadoraByCidade(request, response);
                     break;
-                case "/atualizar":
-                    atualizarLocadora(request, response);
-                    break;
-
-                // deletar
-                case "/deletar":
-                    deletarLocadora(request, response);
+                case "/procurarByCidade":
+                    procuraLocadoraByCidade(request, response);
                     break;
 
                 default:
@@ -84,7 +77,7 @@ public class ControllerLocadora extends HttpServlet {
     // Página inicial
     private void paginaInicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/opcoesLocadora.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/opcoesLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -93,7 +86,7 @@ public class ControllerLocadora extends HttpServlet {
     // apresenta formulário de criação de Locadora
     private void novoLocadoraForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/novoLocadora.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/novoLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -114,7 +107,7 @@ public class ControllerLocadora extends HttpServlet {
         else {
             String errorMessage = URLEncoder.encode("Locadora ja existe!",
                     StandardCharsets.UTF_8.toString());
-            response.sendRedirect(request.getContextPath() + "/locadora/list?error=" + errorMessage);
+            response.sendRedirect(request.getContextPath() + "/locadoraView/locadora/list?error=" + errorMessage);
         }
 
     }
@@ -136,7 +129,7 @@ public class ControllerLocadora extends HttpServlet {
         request.setAttribute("listaLocadora", listaLocadora);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/LocadoraLista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraLista.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -145,7 +138,7 @@ public class ControllerLocadora extends HttpServlet {
     private void paginaBuscarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Teste de conexão: System.out.println("cade a pagina fi");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/buscaLocadora.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/buscaLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -160,14 +153,15 @@ public class ControllerLocadora extends HttpServlet {
 
                 if (Locadora != null) {
                     request.setAttribute("LocadoraEspecifico", Locadora);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/LocadoraEspecifico.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraEspecifico.jsp");
                     dispatcher.forward(request, response);
                 }
 
                 else {
                     String errorMessage = URLEncoder.encode("Locadora não encontrada. ID não reconhecido",
                             StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/buscaLocadora.jsp?error=" + errorMessage);
+                    response.sendRedirect(
+                            request.getContextPath() + "/locadoraView/buscaLocadora.jsp?error=" + errorMessage);
                 }
             }
 
@@ -177,43 +171,26 @@ public class ControllerLocadora extends HttpServlet {
         }
     }
 
-    // Funções de UPDATE
-
-    // apresenta formulário de edição de Locadora com informações referentes ao seu
-    // id
-    private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
+    // apresenta formulário de busca de Locadora por cidade
+    private void buscaLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        Locadora LocadoraExistente = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/editarLocadora.jsp");
-        request.setAttribute("Locadora", LocadoraExistente);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/buscaLocadoraByCidade.jsp");
         dispatcher.forward(request, response);
     }
 
-    // atualiza informações de Locadora no banco de dados
-    private void atualizarLocadora(HttpServletRequest request, HttpServletResponse response)
+    // busca locadora por cidade DE FATO no banco
+    private void procuraLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cidade = request.getParameter("cidade");
-        String cnpj = request.getParameter("cnpj");
+        String Cidade = request.getParameter("cidade");
+        try {
+            List<Locadora> Locadoras = dao.getByCidade(Cidade);
+            request.setAttribute("listaLocadorasCidade", Locadoras);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraCidadeLista.jsp");
+            dispatcher.forward(request, response);
+        }
 
-        Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
-        dao.update(LocadoraAtualizado);
-        response.sendRedirect("list");
+        catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e);
+        }
     }
-
-    // Funções de DELETE
-
-    // deleta Locadora do banco de dados
-    private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        dao.delete(id);
-        // redireciona para a pagina em Locadora/list
-        response.sendRedirect("list");
-    }
-
 }

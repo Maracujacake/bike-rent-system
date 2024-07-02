@@ -15,7 +15,7 @@
         <div class="flex justify-center items-center h-screen">
             <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center"><fmt:message key="locadora.edit" /></h2>
-                <form action="${pageContext.request.contextPath}/locadora/atualizar" method="post" class="space-y-4">
+                <form action="${pageContext.request.contextPath}/admin/atualizarLocadora" method="post" class="space-y-4">
                     <input type="hidden" name="id" value="${Locadora.id}">
 
                     <div>
