@@ -50,7 +50,7 @@ public class ClienteDAO extends GenericDAO {
         return true;
     }
 
-    /********* get LOCACAO by ID  *********/
+    /********* get LOCACAO by ID *********/
     public Locacao getLocacaoByID(Long id) {
 
         Locacao locacao = null;
@@ -80,8 +80,7 @@ public class ClienteDAO extends GenericDAO {
         return locacao;
     }
 
-
-    /********* get LOCAÇÕES by CPF  *********/
+    /********* get LOCAÇÕES by CPF *********/
     public List<Locacao> getLocacaoByCPF(String cpf) {
 
         List<Locacao> listaCliente = new ArrayList<>();
@@ -93,7 +92,7 @@ public class ClienteDAO extends GenericDAO {
             statement.setString(1, cpf);
 
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String cnpjLocadora = resultSet.getString("cnpjLocadora");
                 String dataHorario = resultSet.getString("dataHorario");
@@ -112,25 +111,25 @@ public class ClienteDAO extends GenericDAO {
         return listaCliente;
     }
 
-        /********* update LOCAÇÃO by CPF  *********/
-        public void updateLocacao(Locacao locacao) {
-            String sql = "UPDATE locacao SET cpfCliente = ?, cnpjLocadora = ?, dataHorario = ? WHERE id = ?";
-            String dtDiaHora = locacao.getRegistro().toString();
-            try {
-                Connection con = this.getConnection();
-                PreparedStatement statement = con.prepareStatement(sql);
-                statement.setString(1, locacao.getCpfCliente());
-                statement.setString(2, locacao.getCnpjLocadora());
-                statement.setString(3, dtDiaHora);
-                statement.setLong(4, locacao.getId());
-    
-                statement.executeUpdate();
-                statement.close();
-                con.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+    /********* update LOCAÇÃO by CPF *********/
+    public void updateLocacao(Locacao locacao) {
+        String sql = "UPDATE locacao SET cpfCliente = ?, cnpjLocadora = ?, dataHorario = ? WHERE id = ?";
+        String dtDiaHora = locacao.getRegistro().toString();
+        try {
+            Connection con = this.getConnection();
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, locacao.getCpfCliente());
+            statement.setString(2, locacao.getCnpjLocadora());
+            statement.setString(3, dtDiaHora);
+            statement.setLong(4, locacao.getId());
+
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+    }
 
     // READ ALL
     public List<Cliente> getAll() {

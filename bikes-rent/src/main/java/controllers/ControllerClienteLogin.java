@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ClienteLoginDAO;
+import domain.Cliente;
 
 // confere as informações de login do cliente provenientes do loginCliente.jsp
 @WebServlet("/clienteLogin")
@@ -28,10 +29,11 @@ public class ControllerClienteLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         try {
-            if (dao.authCliente(email, password) != null) {
+            Cliente cliente = dao.authCliente(email, password);
+            if (cliente != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("email", email);
-
+                session.setAttribute("email", cliente.getEmail());
+                session.setAttribute("cpf", cliente.getCpf());
                 String redirectTo = (String) session.getAttribute("redirectTo");
                 if (redirectTo != null) {
                     session.removeAttribute("redirectTo");

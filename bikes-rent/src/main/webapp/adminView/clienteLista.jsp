@@ -37,8 +37,8 @@
                                 <td class="border border-gray-300 px-4 py-2">${cliente.sexo}</td>
                                 <td class="border border-gray-300 px-4 py-2">${cliente.id}</td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <a href="${pageContext.request.contextPath}/cliente/editar?id=${cliente.id}" class="text-blue-500 hover:underline"><fmt:message key="atualizar" /></a>
-                                    <a href="${pageContext.request.contextPath}/cliente/deletar?id=${cliente.id}" class="text-red-500 hover:underline ml-2 delete-link"><fmt:message key="deletar" /></a>
+                                    <a href="${pageContext.request.contextPath}/admin/editarCliente?id=${cliente.id}" class="text-blue-500 hover:underline"><fmt:message key="atualizar" /></a>
+                                    <a href="${pageContext.request.contextPath}/admin/deletarCliente?id=${cliente.id}" class="text-red-500 hover:underline ml-2 delete-link"><fmt:message key="deletar" /></a>
                                 </td>
                             </tr>
                         </c:forEach>

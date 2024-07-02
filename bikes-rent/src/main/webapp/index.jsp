@@ -26,7 +26,7 @@
             <div class="space-x-4 mb-8">
                 <a href="cliente/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="clientes" /></a>
                 <a href="locadora/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locadoras" /></a>
-                <a href="locacoes/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locacoes" /></a>
+                <a href="locacao/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locacoes" /></a>
             </div>
         </div>
     </div>

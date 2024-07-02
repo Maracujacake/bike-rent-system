@@ -23,14 +23,14 @@
                     </h2>
                     <ul class="space-y-4">
                         <li>
-                            <a href="${pageContext.request.contextPath}/cliente/list"
+                            <a href="${pageContext.request.contextPath}/locacao/list"
                                 class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
                                 <fmt:message key="cliente.listaTodos" />
                             </a>
                         </li>
 
                         <li>
-                            <a href="${pageContext.request.contextPath}/cliente/buscarCliente"
+                            <a href="${pageContext.request.contextPath}/locacao/buscarLocacao"
                                 class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
                                 <fmt:message key="cliente.getById" />
                             </a>

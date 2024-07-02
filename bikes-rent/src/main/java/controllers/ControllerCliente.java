@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ClienteDAO;
 import domain.Cliente;
@@ -91,8 +93,15 @@ public class ControllerCliente extends HttpServlet {
     // Apresenta todas as locações de um cliente dado o cpf
     private void listarClienteLocacaoByCPF(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cpf = request.getParameter("cpf");
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession(false);
+
+        String cpf = session.getAttribute("cpf").toString();
+
         List<Locacao> listaCliente = dao.getLocacaoByCPF(cpf);
+        for (Locacao x : listaCliente) {
+            System.out.println(x.getCnpjLocadora());
+        }
         request.setAttribute("listaCliente", listaCliente);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
@@ -139,6 +148,7 @@ public class ControllerCliente extends HttpServlet {
     // Página inicial
     private void paginaInicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/opcoesCliente.jsp");
         dispatcher.forward(request, response);
     }

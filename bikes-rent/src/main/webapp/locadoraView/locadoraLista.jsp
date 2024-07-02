@@ -54,11 +54,11 @@
                                             <td class="border border-gray-300 px-4 py-2">${locadora.id}</td>
                                             <td class="border border-gray-300 px-4 py-2">${locadora.email}</td>
                                             <td class="border border-gray-300 px-4 py-2">
-                                                <a href="${pageContext.request.contextPath}/locadora/editar?id=${locadora.id}"
+                                                <a href="${pageContext.request.contextPath}/admin/editarLocadora?id=${locadora.id}"
                                                     class="text-blue-500 hover:underline">
                                                     <fmt:message key="atualizar" />
                                                 </a>
-                                                <a href="${pageContext.request.contextPath}/locadora/deletar?id=${locadora.id}"
+                                                <a href="${pageContext.request.contextPath}/admin/deletarLocadora?id=${locadora.id}"
                                                     class="text-red-500 hover:underline ml-2 delete-link">
                                                     <fmt:message key="deletar" />
                                                 </a>

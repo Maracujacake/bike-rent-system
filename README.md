@@ -1,4 +1,5 @@
 # bike-rent-system
+
 Sistema de locação de bicicletas.
 
 http://localhost:8080/bikes-rent/
@@ -7,19 +8,22 @@ execute com mvn clean package tomcat7:run-war
 # to-dos:
 
 - ## organizar o código
-- - organizar em clienteView somente as páginas que cliente pode acessar
-- - criar um adminController com as funções antigas de cliente, afinal, cliente não pode ver informações de outros clientes, apenas admin pode
-- - esse adminController deve possuir as funções de locadora também que não devem ser acessíveis a locadora, ex: ver as locações de outras locadoras
-- - retirar o código antigo de clienteController e deixar somente no adminController
-- - adicionar instâncias ao arquivo .sql para o banco de dados já iniciar populado
+- - organizar em clienteView somente as páginas que cliente pode acessar _V_
+- - criar um adminController com as funções antigas de cliente, afinal, cliente não pode ver informações de outros clientes, apenas admin pode _V_
+- - esse adminController deve possuir as funções de locadora também que não devem ser acessíveis a locadora, ex: ver as locações de outras locadoras _V_
+- - retirar o código antigo de clienteController e deixar somente no adminController _V_
+- - adicionar instâncias ao arquivo .sql para o banco de dados já iniciar populado _V_
 
 <hr>
 
 - ## fixes
-- - cliente não deve passar cpf para busca de locações, ele pode acabar passando o cpf de outro cliente e ver as locações de outra pessoa
+- - cliente não deve passar cpf para busca de locações, ele pode acabar passando o cpf de outro cliente e ver as locações de outra pessoa _V_
 - - ajustar as traduções nas paginas .jsp para poder fazer o merge com a main // faz um pull da branch main, pega arquivo de traduções e substitui as páginas
-
-<hr>
+- - Mover algumas funções de locação para admin. Obrigar login para acessar locacoes
+- - Nao passar cpf para ver locacoes nem outra coisa, pegar da sessão(remover uma pagina de passar o cpf)
+- - Revisar arquivos apos merges
+- - Sessao de usuario normal funciona nas locacoes(checar permissões de ususarios x permissão de admins)
+  <hr>
 
 - ## implementação
 - - adminController
