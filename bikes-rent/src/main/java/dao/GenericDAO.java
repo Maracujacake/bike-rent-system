@@ -22,7 +22,7 @@ public class GenericDAO {
 
         String dbpass= dotenv.get("DB_PASSWORD");
         String dbUser = dotenv.get("DB_USER");
-        System.out.println("dbpass: "+dbpass + " dbUser: "+dbUser);
+        
         // return DriverManager.getConnection(url, "root", "root");
         // configurar usuario e senha conforme o banco
 

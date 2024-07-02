@@ -18,6 +18,12 @@ execute com mvn clean package tomcat7:run-war
 - ## fixes
 - - Mover algumas funções de locação para admin. Obrigar login para acessar locacoes
 - - Revisar arquivos apos merges
+- - Ao adicionar uma locação como cliente existem dois problemas:
+    - Nao é adicionado.
+    - É redirecionado para outra pagina, deveria continuar na parte de cliente/
+- - Como usuario eu consigo adicionar uma nova locadora
+
+
 <hr>
 
 - ## implementação
@@ -25,4 +31,11 @@ execute com mvn clean package tomcat7:run-war
 - - página de login para locadora (pode ser o mesmo estilo para página de login de cliente, porém, deve redirecionar para o filtro/controller locadora)
 - - deve haver um botão para locadora fazer login
 - - página de erros ( horário não é cheio, tentativa de criar uma locação sem cliente existente ou locadora existente (precisa de ambos), etc )
+- - Melhorar tratamento de erros, como senha, usuario invalidos ou usuario sem permissão etc.
 - - ao criar locação (ao inserir no banco de dados com sucesso), enviar arquivo pdf ao email do cliente e locadora
+- - Crud de clientes
+
+- ## Duvidas
+- - Locadoras tem apenas uma bicicleta ?
+
+
