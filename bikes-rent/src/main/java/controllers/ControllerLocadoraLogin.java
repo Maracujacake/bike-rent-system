@@ -46,7 +46,7 @@ public class ControllerLocadoraLogin extends HttpServlet {
                     session.removeAttribute("redirectTo");
                     response.sendRedirect(request.getContextPath() + redirectTo);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/locadoraLogado/");
+                    response.sendRedirect(request.getContextPath() + "/locadoraLogged/");
                 }
             } else {
                 response.sendRedirect(request.getContextPath() + "/login/loginLocadora.jsp");
