@@ -76,11 +76,6 @@ public class ControllerLocacao extends HttpServlet {
                     atualizarLocacao(request, response);
                     break;
 
-                // deletar
-                case "/deletar":
-                    deletarLocacao(request, response);
-                    break;
-
                 default:
                     paginaInicial(request, response);
                     break;
@@ -208,14 +203,5 @@ public class ControllerLocacao extends HttpServlet {
         response.sendRedirect("list");
     }
 
-    // Funções de DELETE
-    // deleta Locadora do banco de dados
-    private void deletarLocacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        dao.delete(id);
-        // redireciona para a pagina em Locadora/list
-        response.sendRedirect("list");
-    }
-
+    
 }

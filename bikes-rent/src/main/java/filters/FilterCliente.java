@@ -22,7 +22,7 @@ public class FilterCliente implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
-        if (session == null || session.getAttribute("email") == null) {
+        if (session == null || session.getAttribute("role") == null || !"cliente".equals(session.getAttribute("role"))) {
             session = httpRequest.getSession();
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login/loginCliente.jsp");
         } else {

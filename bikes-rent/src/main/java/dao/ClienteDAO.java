@@ -51,6 +51,8 @@ public class ClienteDAO extends GenericDAO {
     }
 
     /********* get LOCACAO by ID *********/
+    // obs: O mesmo código já existe em locacaoDAO, poderiamos criar um outro objeto baseado em locacaoDAO
+    // para chamar o metodo ja existente em vez de escreve-lo dnv.
     public Locacao getLocacaoByID(Long id) {
 
         Locacao locacao = null;

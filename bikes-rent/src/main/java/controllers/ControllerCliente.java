@@ -31,6 +31,7 @@ public class ControllerCliente extends HttpServlet {
     @Override
     public void init() {
         dao = new ClienteDAO();
+        daoLocacao = new LocacaoDAO();
         // System.out.println("ALO"); teste de inicialização
     }
 
@@ -82,6 +83,10 @@ public class ControllerCliente extends HttpServlet {
                 case "/inserirLocacao":
                     inserirLocacao(request, response);
                     break;
+
+                case "/deletarLocacao":
+                    deletarLocacao(request, response);
+                    break;
                 default:
                     paginaInicial(request, response);
                     break;
@@ -91,7 +96,8 @@ public class ControllerCliente extends HttpServlet {
 
         catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -115,10 +121,12 @@ public class ControllerCliente extends HttpServlet {
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
 
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
-
+        //System.out.println(novaLocacao.getCnpjLocadora());
+        //System.out.println(novaLocacao.getCpfCliente());
+        //System.out.println(novaLocacao.getRegistro());
         Boolean funcionou = daoLocacao.insert(novaLocacao);
         if (funcionou) {
-            response.sendRedirect("list");
+            response.sendRedirect("clienteCPF");
         } else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",
                     StandardCharsets.UTF_8.toString());
@@ -219,6 +227,16 @@ public class ControllerCliente extends HttpServlet {
         Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
         dao.insert(novoCliente);
         response.sendRedirect("");
+    }
+
+        // Funções de DELETE
+    // deleta Locadora do banco de dados
+    private void deletarLocacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        daoLocacao.delete(id);
+        // redireciona para a pagina de locacoes de cliente
+        response.sendRedirect("clienteCPF");
     }
 
 }

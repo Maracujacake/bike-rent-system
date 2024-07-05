@@ -24,6 +24,7 @@
         <div class="text-center text-white">
             <h1 class="text-6xl font-elegant mb-16">Bike Rent System</h1>
             <div class="space-x-4 mb-8">
+                <a href="locadoraLogged/" class="text-2xl hover:text-purple-600 transition duration-300">Locadora login</a>
                 <a href="cliente/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="clientes" /></a>
                 <a href="locadora/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locadoras" /></a>
                 <a href="locacao/" class="text-2xl hover:text-blue-300 transition duration-300"><fmt:message key="locacoes" /></a>
