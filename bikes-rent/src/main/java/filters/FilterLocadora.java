@@ -35,7 +35,6 @@ public class FilterLocadora implements Filter {
             }
 
             session = httpRequest.getSession();
-            session.setAttribute("redirectTo", httpRequest.getRequestURI());
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login/loginLocadora.jsp");
         } else {
             System.out.println("Sessão encontrada com papel: " + session.getAttribute("role"));

@@ -87,6 +87,12 @@
                                 class="text-blue-500 hover:underline">
                                 <fmt:message key="locadora.getById" />
                             </a>
+
+                            <a href="${pageContext.request.contextPath}/locadora/buscaLocadoraByCidade"
+                                class="text-blue-500 hover:underline">
+                                <fmt:message key="locadora.getByCidade" />
+                            </a>
+
                             <a href="${pageContext.request.contextPath}/locadora/novo"
                                 class="text-green-500 hover:underline">
                                 <fmt:message key="locadora.add" />
