@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,11 @@
 
                 <div>
                     <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ Locadora:</label>
-                    <input type="text" name="cnpj" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <select name="cnpj" required>
+                        <c:forEach var="locadora" items="${listaLocadora}">
+                            <option value="${locadora.cnpj}">${locadora.cnpj}</option>
+                        </c:forEach>
+                    </select>
                 </div>
 
                 <div>

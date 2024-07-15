@@ -53,7 +53,7 @@
 
             <div class="flex justify-around">
                 <a href="${pageContext.request.contextPath}/admin/buscarCliente" class="text-blue-500 hover:underline"><fmt:message key="cliente.getById" /></a>
-                <a href="${pageContext.request.contextPath}/cliente/novo" class="text-green-500 hover:underline"><fmt:message key="cliente.add" /></a>
+                <a href="${pageContext.request.contextPath}/public" class="text-green-500 hover:underline"><fmt:message key="cliente.add" /></a>
             </div>
         </div>
     </div>

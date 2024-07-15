@@ -118,14 +118,14 @@ public class LocadoraDAO extends GenericDAO {
         return Locadora;
     }
 
-      // READ BY Cidade
-      public List<Locadora> getByCidade(String cidade) {
-        String sql = "SELECT * from locadora where cidade = ?";
+    // READ BY Cidade
+    public List<Locadora> getByCidade(String cidade) {
+        String sql = "SELECT * from locadora where cidade like ?";
         List<Locadora> listaLocadoras = new ArrayList<>();
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, cidade);
+            statement.setString(1, cidade + '%');
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -135,8 +135,9 @@ public class LocadoraDAO extends GenericDAO {
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String cnpj = resultSet.getString("cnpj");
+                String city = resultSet.getString("cidade");
 
-                Locadora locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
+                Locadora locadora = new Locadora(id, senha, nome, city, cnpj, email);
                 listaLocadoras.add(locadora);
             }
 
@@ -150,7 +151,6 @@ public class LocadoraDAO extends GenericDAO {
         }
         return listaLocadoras;
     }
-
 
     // Get by email
     public Locadora get(String email) {
@@ -199,7 +199,6 @@ public class LocadoraDAO extends GenericDAO {
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String cidade = resultSet.getString("cidade");
-
 
                 Locadora = new Locadora(id, senha, nome, cidade, email, cnpj);
             }
@@ -255,7 +254,6 @@ public class LocadoraDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-
 
     public List<Locacao> getLocacaoByCNPJ(String cnpj) {
 

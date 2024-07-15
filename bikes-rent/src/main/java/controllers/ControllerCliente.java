@@ -18,8 +18,10 @@ import javax.servlet.http.HttpSession;
 
 import dao.ClienteDAO;
 import dao.LocacaoDAO;
+import dao.LocadoraDAO;
 import domain.Cliente;
 import domain.Locacao;
+import domain.Locadora;
 
 @WebServlet(urlPatterns = "/cliente/*")
 public class ControllerCliente extends HttpServlet {
@@ -27,11 +29,13 @@ public class ControllerCliente extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDAO dao;
     private LocacaoDAO daoLocacao;
+    private LocadoraDAO daoLocadora;
 
     @Override
     public void init() {
         dao = new ClienteDAO();
         daoLocacao = new LocacaoDAO();
+        daoLocadora = new LocadoraDAO();
         // System.out.println("ALO"); teste de inicialização
     }
 
@@ -96,17 +100,18 @@ public class ControllerCliente extends HttpServlet {
 
         catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
-        } 
-        catch (SQLException e) {
-            // TODO Auto-generated catch block
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-        // Funções de CREATE
+    // Funções de CREATE
     // apresenta formulário de criação de Locadora
     private void novoLocacaoForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<Locadora> loc = daoLocadora.getAll();
+        loc.forEach(x -> System.out.println(x.getNome()));
+        request.setAttribute("listaLocadora", loc);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/novoLocacao.jsp");
         dispatcher.forward(request, response);
     }
@@ -121,9 +126,9 @@ public class ControllerCliente extends HttpServlet {
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
 
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
-        //System.out.println(novaLocacao.getCnpjLocadora());
-        //System.out.println(novaLocacao.getCpfCliente());
-        //System.out.println(novaLocacao.getRegistro());
+        // System.out.println(novaLocacao.getCnpjLocadora());
+        // System.out.println(novaLocacao.getCpfCliente());
+        // System.out.println(novaLocacao.getRegistro());
         Boolean funcionou = daoLocacao.insert(novaLocacao);
         if (funcionou) {
             response.sendRedirect("clienteCPF");
@@ -229,7 +234,7 @@ public class ControllerCliente extends HttpServlet {
         response.sendRedirect("");
     }
 
-        // Funções de DELETE
+    // Funções de DELETE
     // deleta Locadora do banco de dados
     private void deletarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -15,35 +15,37 @@ import dao.AdminDAO;
 @WebServlet("/adminLogin")
 public class ControllerAdminLogin extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private AdminDAO dao; 
-
+    private AdminDAO dao;
 
     @Override
     public void init() {
         dao = new AdminDAO();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-            try {
-                if (dao.authAdmin(email, password) != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("email", email);
-                    session.setAttribute("role", "admin");
+        try {
+            if (dao.authAdmin(email, password) != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("email", email);
+                String nomeAdmin = email.split("@")[0];
+                session.setAttribute("role", "admin");
+                session.setAttribute("nome", nomeAdmin);
 
-                    String redirectTo = (String) session.getAttribute("redirectTo");
-                    if (redirectTo != null) {
-                        session.removeAttribute("redirectTo");
-                        response.sendRedirect(request.getContextPath() + redirectTo);
-                    } else {
-                        response.sendRedirect(request.getContextPath() + "/admin/");
-                    }
+                String redirectTo = (String) session.getAttribute("redirectTo");
+                if (redirectTo != null) {
+                    session.removeAttribute("redirectTo");
+                    response.sendRedirect(request.getContextPath() + redirectTo);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/login/loginAdmin.jsp");
+                    response.sendRedirect(request.getContextPath() + "/admin/");
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login/loginAdmin.jsp");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

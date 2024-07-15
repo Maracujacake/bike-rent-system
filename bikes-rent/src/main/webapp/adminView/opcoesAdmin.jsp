@@ -12,7 +12,7 @@
 
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a)</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a) ${sessionScope.nome}</h2>
             <ul class="space-y-4">
                 <li>
                     <!-- Mostra todos os clientes -->

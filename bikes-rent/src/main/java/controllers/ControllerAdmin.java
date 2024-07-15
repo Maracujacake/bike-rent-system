@@ -32,12 +32,14 @@ public class ControllerAdmin extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getPathInfo();
         if (action == null) {
             action = " ";
@@ -46,7 +48,7 @@ public class ControllerAdmin extends HttpServlet {
         try {
             switch (action) {
 
-                //CLIENTE
+                // CLIENTE
                 // read
                 case "/listCliente":
                     listarClientes(request, response);
@@ -138,7 +140,7 @@ public class ControllerAdmin extends HttpServlet {
             try {
                 long id = Long.parseLong(idCliente);
                 Cliente cliente = dao.get(id);
-
+                System.out.println(cliente == null);
                 if (cliente != null) {
                     request.setAttribute("clienteEspecifico", cliente);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/clienteEspecifico.jsp");
@@ -146,7 +148,8 @@ public class ControllerAdmin extends HttpServlet {
                 } else {
                     String errorMessage = URLEncoder.encode("Cliente não encontrado. ID não reconhecido",
                             StandardCharsets.UTF_8.toString());
-                    response.sendRedirect(request.getContextPath() + "/buscaCliente.jsp?error=" + errorMessage);
+                    response.sendRedirect(
+                            request.getContextPath() + "/adminView/buscaCliente.jsp?error=" + errorMessage);
                 }
             } catch (RuntimeException | IOException | ServletException e) {
                 throw new ServletException(e);

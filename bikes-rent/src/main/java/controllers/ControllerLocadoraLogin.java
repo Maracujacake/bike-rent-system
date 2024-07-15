@@ -20,7 +20,6 @@ public class ControllerLocadoraLogin extends HttpServlet {
     private LocadoraLoginDAO dao;
     private LocadoraDAO daoLocadora;
 
-
     @Override
     public void init() {
         dao = new LocadoraLoginDAO();
@@ -42,9 +41,10 @@ public class ControllerLocadoraLogin extends HttpServlet {
                 session.setAttribute("senha", locadora.getSenha());
                 session.setAttribute("role", "locadora");
                 String redirectTo = (String) session.getAttribute("redirectTo");
+                System.out.println(redirectTo + "   " + request.getContextPath());
                 if (redirectTo != null) {
                     session.removeAttribute("redirectTo");
-                    response.sendRedirect(request.getContextPath() + redirectTo);
+                    response.sendRedirect(redirectTo);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/locadoraLogged/");
                 }

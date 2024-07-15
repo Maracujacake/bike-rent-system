@@ -19,7 +19,7 @@
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">
                         <fmt:message key="cliente.new" />
                     </h2>
-                    <form action="${pageContext.request.contextPath}/cliente/inserir" method="post" class="space-y-4">
+                    <form action="${pageContext.request.contextPath}/public/criarCliente" method="post" class="space-y-4">
                         <div>
                             <label for="nome" class="block text-sm font-medium text-gray-700">
                                 <fmt:message key="nome" />:
