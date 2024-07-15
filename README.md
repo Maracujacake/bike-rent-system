@@ -16,12 +16,7 @@ execute com mvn clean package tomcat7:run-war
 <hr>
 
 - ## fixes
-- - Mover algumas funções de locação para admin. Obrigar login para acessar locacoes
-- - Revisar arquivos apos merges
-- - Ao adicionar uma locação como cliente existem dois problemas: 
-    - Nao é adicionado. V
-    - É redirecionado para outra pagina, deveria continuar na parte de cliente/ V
-- - Como usuario eu consigo adicionar uma nova locadora
+- - Mensagem para deletar locacao esta errada.
 
 
 <hr>
@@ -37,5 +32,4 @@ execute com mvn clean package tomcat7:run-war
 
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
-- - Usuário comum nao poderia criar locadoras? Ex: eu quero incluir minha locadora
 
