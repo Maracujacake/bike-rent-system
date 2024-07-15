@@ -5,46 +5,37 @@ Sistema de locação de bicicletas.
 http://localhost:8080/bikes-rent/
 execute com mvn clean package tomcat7:run-war
 
+# Configurar .env
+    - Criar arquivo .env dentro da pasta bikes-rent
+    - Adicionar campos *DB_USER*, *DB_PASSWORD*
+
 # to-dos:
 
 - ## organizar o código
-<<<<<<< HEAD
-- - organizar em clienteView somente as páginas que cliente pode acessar _V_
-- - criar um adminController com as funções antigas de cliente, afinal, cliente não pode ver informações de outros clientes, apenas admin pode _V_
-- - esse adminController deve possuir as funções de locadora também que não devem ser acessíveis a locadora, ex: ver as locações de outras locadoras _V_
-- - retirar o código antigo de clienteController e deixar somente no adminController _V_
-- - adicionar instâncias ao arquivo .sql para o banco de dados já iniciar populado _V_
-=======
-- - organizar em clienteView somente as páginas que cliente pode acessar
-- - criar um adminController com as funções antigas de cliente, afinal, cliente não pode ver informações de outros clientes, apenas admin pode
-- - esse adminController deve possuir as funções de locadora também que não devem ser acessíveis a locadora, ex: ver as locações de outras locadoras
-- - retirar o código antigo de clienteController e deixar somente no adminController
-- - adicionar instâncias ao arquivo .sql para o banco de dados já iniciar populado
->>>>>>> main
 
 <hr>
 
 - ## fixes
-<<<<<<< HEAD
-- - cliente não deve passar cpf para busca de locações, ele pode acabar passando o cpf de outro cliente e ver as locações de outra pessoa _V_
-- - ajustar as traduções nas paginas .jsp para poder fazer o merge com a main // faz um pull da branch main, pega arquivo de traduções e substitui as páginas
 - - Mover algumas funções de locação para admin. Obrigar login para acessar locacoes
-- - Nao passar cpf para ver locacoes nem outra coisa, pegar da sessão(remover uma pagina de passar o cpf)
 - - Revisar arquivos apos merges
-- - Sessao de usuario normal funciona nas locacoes(checar permissões de ususarios x permissão de admins)
-  <hr>
-=======
-- - cliente não deve passar cpf para busca de locações, ele pode acabar passando o cpf de outro cliente e ver as locações de outra pessoa
-- - ajustar as traduções nas paginas .jsp para poder fazer o merge com a main // faz um pull da branch main, pega arquivo de traduções e substitui as páginas
+- - Ao adicionar uma locação como cliente existem dois problemas: 
+    - Nao é adicionado. V
+    - É redirecionado para outra pagina, deveria continuar na parte de cliente/ V
+- - Como usuario eu consigo adicionar uma nova locadora
+
 
 <hr>
->>>>>>> main
 
 - ## implementação
-- - adminController
-- - filtro para admin e locadora
-- - página de login para admin e locadora (pode ser o mesmo estilo para página de login de cliente, porém, deve redirecionar para o filtro/controller de admin e/ou locadora)
-- - na página inicial, opção para ver locadoras e locadoras por cidade é pública
-- - deve haver um botão para locadora fazer login, além dos outros dois acima ^
+- - filtro para locadora (locadora pode ver quais locações estão em seu cnpj) V
+- - página de login para locadora (pode ser o mesmo estilo para página de login de cliente, porém, deve redirecionar para o filtro/controller locadora) V
+- - deve haver um botão para locadora fazer login V
 - - página de erros ( horário não é cheio, tentativa de criar uma locação sem cliente existente ou locadora existente (precisa de ambos), etc )
+- - Melhorar tratamento de erros, como senha, usuario invalidos ou usuario sem permissão etc.
 - - ao criar locação (ao inserir no banco de dados com sucesso), enviar arquivo pdf ao email do cliente e locadora
+- - Crud de clientes
+
+- ## Duvidas
+- - Locadoras tem apenas uma bicicleta ?
+- - Usuário comum nao poderia criar locadoras? Ex: eu quero incluir minha locadora
+

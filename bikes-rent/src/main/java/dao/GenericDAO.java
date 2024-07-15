@@ -3,7 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import io.github.cdimascio.dotenv.Dotenv;
 public class GenericDAO {
     public GenericDAO() {
         try {
@@ -18,14 +18,15 @@ public class GenericDAO {
     protected Connection getConnection() throws SQLException {
 
         String url = "jdbc:mysql://localhost:3306/bikeRentSystem?serverTimezone=America/New_York";
+        Dotenv dotenv = Dotenv.load();
 
+        String dbpass= dotenv.get("DB_PASSWORD");
+        String dbUser = dotenv.get("DB_USER");
+        
         // return DriverManager.getConnection(url, "root", "root");
         // configurar usuario e senha conforme o banco
 
-        // String user = "root";
-        // String password = "root";
-        String user = "chris";
-        String password = "1234";
-        return DriverManager.getConnection(url, user, password);
+     
+        return DriverManager.getConnection(url, dbUser, dbpass);
     }
 }
