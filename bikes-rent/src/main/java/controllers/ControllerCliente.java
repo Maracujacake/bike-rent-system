@@ -22,6 +22,7 @@ import dao.LocadoraDAO;
 import domain.Cliente;
 import domain.Locacao;
 import domain.Locadora;
+import service.EmailService;
 
 @WebServlet(urlPatterns = "/cliente/*")
 public class ControllerCliente extends HttpServlet {
@@ -110,7 +111,6 @@ public class ControllerCliente extends HttpServlet {
     private void novoLocacaoForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Locadora> loc = daoLocadora.getAll();
-        loc.forEach(x -> System.out.println(x.getNome()));
         request.setAttribute("listaLocadora", loc);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/novoLocacao.jsp");
         dispatcher.forward(request, response);
@@ -121,9 +121,14 @@ public class ControllerCliente extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession session = request.getSession();
         String cpfCliente = (String) session.getAttribute("cpf");
+        String email = (String) session.getAttribute("email");
+
         String cnpjLocadora = request.getParameter("cnpj");
         String dataHora = request.getParameter("dataHorario");
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
+        
+        Locadora locadora = daoLocadora.getByCnpj(cnpjLocadora);
+        String emailLocadora = locadora.getEmail();
 
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
         // System.out.println(novaLocacao.getCnpjLocadora());
@@ -131,6 +136,9 @@ public class ControllerCliente extends HttpServlet {
         // System.out.println(novaLocacao.getRegistro());
         Boolean funcionou = daoLocacao.insert(novaLocacao);
         if (funcionou) {
+
+            EmailService.sendEmail(email, "Locacao Feita ("+dataHora+")", "Sua locacao foi feita com sucesso!");
+            EmailService.sendEmail(emailLocadora, "Locacao Feita ("+dataHora+")", "Um cliente realizou uma locacao com sucesso!");
             response.sendRedirect("clienteCPF");
         } else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",

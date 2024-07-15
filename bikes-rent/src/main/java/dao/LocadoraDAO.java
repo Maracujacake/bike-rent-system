@@ -200,7 +200,7 @@ public class LocadoraDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String cidade = resultSet.getString("cidade");
 
-                Locadora = new Locadora(id, senha, nome, cidade, email, cnpj);
+                Locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
             }
 
             resultSet.close();
