@@ -85,7 +85,7 @@ public class ControllerLocadoraLogado extends HttpServlet {
         String cnpj = (String) session.getAttribute("cnpj");
         List<Locacao> listaLocadora = daoLocadora.getLocacaoByCNPJ(cnpj);
         for (Locacao x : listaLocadora) {
-            System.out.println(x.getCnpjLocadora());
+            //System.out.println(x.getCnpjLocadora());
         }
         request.setAttribute("listaLocadora", listaLocadora);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraLogado/locacoesLocadora.jsp");
