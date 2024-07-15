@@ -231,4 +231,5 @@ public class ControllerAdmin extends HttpServlet {
         // redireciona para a pagina em Locadora/list
         response.sendRedirect("");
     }
+
 }

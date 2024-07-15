@@ -12,25 +12,19 @@
 
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a)</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a) ${sessionScope.nome}!</h2>
             <ul class="space-y-4">
                 <li>
-                    <!-- Mostra todos os clientes -->
-                    <a href="${pageContext.request.contextPath}/admin/listCliente"
+                    <!-- manda para formulário de CPF para busca de locações -->
+                    <a href="${pageContext.request.contextPath}/locadoraLogged/locacoesCNPJ"
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Listar todos os clientes</a>
+                    >Listar suas locações</a>
                 </li>
 
-                <li>
-                    <!-- Página de busca de cliente -->
-                    <a href="${pageContext.request.contextPath}/admin/buscarCliente"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Buscar clientes</a>
-                </li>
 
                 <li>
-                    <!-- Página de busca de cliente -->
-                    <a href="${pageContext.request.contextPath}"
+                    <!-- manda para formulário de criação de locação -->
+                    <a href="${pageContext.request.contextPath}/"
                     class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
                     >Voltar à página inicial</a>
                 </li>

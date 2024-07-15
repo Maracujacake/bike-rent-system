@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.Locacao;
 import domain.Locadora;
 
 public class LocadoraDAO extends GenericDAO {
@@ -116,7 +118,7 @@ public class LocadoraDAO extends GenericDAO {
         return Locadora;
     }
 
-      // READ BY ID
+      // READ BY Cidade
       public List<Locadora> getByCidade(String cidade) {
         String sql = "SELECT * from locadora where cidade = ?";
         List<Locadora> listaLocadoras = new ArrayList<>();
@@ -253,4 +255,36 @@ public class LocadoraDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+
+
+    public List<Locacao> getLocacaoByCNPJ(String cnpj) {
+
+        List<Locacao> listaLocadora = new ArrayList<>();
+        String sql = "SELECT * from locacao WHERE cnpjLocadora = ?";
+
+        try {
+            Connection con = this.getConnection();
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, cnpj);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String cpfCliente = resultSet.getString("cpfCliente");
+                String dataHorario = resultSet.getString("dataHorario");
+
+                LocalDateTime dtDiaHora = LocalDateTime.parse(dataHorario);
+
+                Locacao locacao = new Locacao(id, cpfCliente, cnpj, dtDiaHora);
+                listaLocadora.add(locacao);
+            }
+            resultSet.close();
+            statement.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaLocadora;
+    }
+
 }
