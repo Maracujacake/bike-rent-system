@@ -22,14 +22,18 @@ execute com mvn clean package tomcat7:run-war
 <hr>
 
 - ## implementação
-- - filtro para locadora (locadora pode ver quais locações estão em seu cnpj) V
-- - página de login para locadora (pode ser o mesmo estilo para página de login de cliente, porém, deve redirecionar para o filtro/controller locadora) V
-- - deve haver um botão para locadora fazer login V
-- - página de erros ( horário não é cheio, tentativa de criar uma locação sem cliente existente ou locadora existente (precisa de ambos), etc )
-- - Melhorar tratamento de erros, como senha, usuario invalidos ou usuario sem permissão etc.
-- - ao criar locação (ao inserir no banco de dados com sucesso), enviar arquivo pdf ao email do cliente e locadora
-- - Crud de clientes
-
+    -formatar horário locação -> Ivan - [ ]
+    -mostrar que login falhou (talvez ja arrumamos k) - [ ]
+    -tirar o adicionar locacao como locadora - [ ]
+    -editar propria locadora -> Chris - [ ]
+    -cliente deveria editar seus dados -> Vitor - [ ]
+    -mandar emails pos locacao -> Ivan - [x]
+    -requisito 7 ? - [ ]
+    -terminar traducoes adicionar botao para mudar linguagem das paginas -> Chris - [ ]
+    -verificar tratativas de erros/fuçar para encontrar problemas -> TODOS - [ ]
+    -atualizar pagina de atualizar locacao -> Carol - [ ]
+    -lista de locações da locadora faltando a parte de opções e cpf do cliente talvez. -> Carol - [ ]
+    -Listar locadoras para o admin, e a possibilidade dele editar, deletar. -> Carol - [ ]
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
 
