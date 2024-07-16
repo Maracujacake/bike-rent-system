@@ -7,7 +7,7 @@ execute com mvn clean package tomcat7:run-war
 
 # Configurar .env
     - Criar arquivo .env dentro da pasta bikes-rent
-    - Adicionar campos *DB_USER*, *DB_PASSWORD*
+    - Adicionar campos *DB_USER*, *DB_PASSWORD*, *EMAILKEY*
 
 # to-dos:
 

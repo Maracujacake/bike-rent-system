@@ -21,14 +21,14 @@ public class LocacaoDAO extends GenericDAO {
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            Boolean existe = this.getBydataHorario(locacao.getRegistro()) != null;
+            Boolean existe = this.getBydataHorario(locacao.getRegistroAsDateTime()) != null;
             if (existe) {
                 statement.close();
                 con.close();
                 return false;
             }
 
-            String stringDiaHora = locacao.getRegistro().toString();
+            String stringDiaHora = locacao.getRegistroAsDateTime().toString();
             statement = con.prepareStatement(sql);
             statement.setString(1, locacao.getCpfCliente());
             statement.setString(2, locacao.getCnpjLocadora());
@@ -142,7 +142,7 @@ public class LocacaoDAO extends GenericDAO {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
 
-            String dataHora = locacao.getRegistro().toString();
+            String dataHora = locacao.getRegistroAsDateTime().toString();
             statement.setString(1, locacao.getCpfCliente());
             statement.setString(2, locacao.getCnpjLocadora());
             statement.setString(3, dataHora);
@@ -175,5 +175,4 @@ public class LocacaoDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-
 }

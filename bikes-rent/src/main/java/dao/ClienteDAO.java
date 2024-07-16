@@ -116,7 +116,7 @@ public class ClienteDAO extends GenericDAO {
     /********* update LOCAÇÃO by CPF *********/
     public void updateLocacao(Locacao locacao) {
         String sql = "UPDATE locacao SET cpfCliente = ?, cnpjLocadora = ?, dataHorario = ? WHERE id = ?";
-        String dtDiaHora = locacao.getRegistro().toString();
+        String dtDiaHora = locacao.getRegistroAsDateTime().toString();
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
@@ -153,7 +153,6 @@ public class ClienteDAO extends GenericDAO {
                 String sexo = resultSet.getString("sexo");
                 String cpf = resultSet.getString("cpf");
                 Date dataNascimento = resultSet.getDate("dataNascimento");
-
                 Cliente cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
                 listaClientes.add(cliente);
             }
