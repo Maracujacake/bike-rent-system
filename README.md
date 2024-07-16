@@ -23,7 +23,7 @@ execute com mvn clean package tomcat7:run-war
 
 - ## implementação
 
-- formatar horário locação -> Ivan &#x2610;
+- formatar horário locação -> Ivan &#x2611;
 
 - mostrar que login falhou (talvez ja arrumamos k) &#x2610;
 
