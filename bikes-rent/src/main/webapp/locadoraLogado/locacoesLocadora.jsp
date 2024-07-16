@@ -19,7 +19,7 @@
                 <table class="w-full mx-auto">
                     <thead>
                         <tr class="bg-gray-100">
-                            <th class="border border-gray-300 px-4 py-2">CNPJ Locadora</th>
+                            <th class="border border-gray-300 px-4 py-2">CPF Cliente</th>
                             <th class="border border-gray-300 px-4 py-2">Data de Locação</th>
                             <th class="border border-gray-300 px-4 py-2">Opções</th>
                         </tr>

@@ -57,9 +57,6 @@ public class Locacao {
 
 
     public void setRegistro(LocalDateTime registro) {
-        if (registro.getMinute() != 0 || registro.getSecond() != 0 || registro.getNano() != 0) {
-            throw new IllegalArgumentException("O registro deve estar na hora cheia (ex: 13:00, 15:00).");
-        }
         this.registro = registro;
     }
 

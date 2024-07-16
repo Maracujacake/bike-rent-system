@@ -22,4 +22,20 @@ public class DataUtils {
     
         return dataFormatada;
     }
+
+    public static boolean checkFullHour(LocalDateTime registro){
+        if (registro.getMinute() != 0 || registro.getSecond() != 0) {
+            //throw new IllegalArgumentException("O registro deve estar na hora cheia (ex: 13:00, 15:00).");
+            return false;
+        }
+        return true;
+    }
+
+    public static String parseLocalDate(LocalDateTime date){
+        // 2024-07-16T18:11:21.073532 -> 2024-06-30T16:30
+        String data = date.toString();
+        data.lastIndexOf(":");
+        data = data.substring(0, data.lastIndexOf(":"));
+        return data;
+    }
 }

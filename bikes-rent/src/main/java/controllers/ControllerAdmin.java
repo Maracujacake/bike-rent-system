@@ -180,7 +180,7 @@ public class ControllerAdmin extends HttpServlet {
         Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf,
                 java.sql.Date.valueOf(dataNascimento));
         dao.update(clienteAtualizado);
-        response.sendRedirect("list");
+        response.sendRedirect("listCliente");
     }
 
     // Funções de DELETE
@@ -190,7 +190,7 @@ public class ControllerAdmin extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         dao.delete(id);
         // redireciona para a pagina em cliente/list
-        response.sendRedirect("list");
+        response.sendRedirect("listCliente");
     }
 
     // LOCADORA
@@ -218,7 +218,7 @@ public class ControllerAdmin extends HttpServlet {
 
         Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
         dao2.update(LocadoraAtualizado);
-        response.sendRedirect("list");
+        response.sendRedirect("listCliente");
     }
 
     // Funções de DELETE

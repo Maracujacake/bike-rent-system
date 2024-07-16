@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
     <title>Nova Locação</title>
 </head>
 <body class="bg-gray-100">
@@ -24,7 +25,7 @@
 
                 <div>
                     <label for="dataHorario" class="block text-sm font-medium text-gray-700">Data:</label>
-                    <input type="datetime-local" name="dataHorario" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <input type="datetime-local" name="dataHorario" min="${dataAtual}" max="2124-06-30T16:30" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <div class="text-center">

@@ -21,7 +21,7 @@ public class LocacaoDAO extends GenericDAO {
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
-            Boolean existe = this.getBydataHorario(locacao.getRegistroAsDateTime()) != null;
+            Boolean existe = this.getBydataHorario(locacao.getRegistroAsDateTime(), locacao.getCnpjLocadora()) != null || this.getBydataHorarioCpf(locacao.getRegistroAsDateTime(), locacao.getCpfCliente()) != null;
             if (existe) {
                 statement.close();
                 con.close();
@@ -108,15 +108,42 @@ public class LocacaoDAO extends GenericDAO {
     }
 
     // READ BY DATAHORARIO
-    public Locacao getBydataHorario(LocalDateTime diaHora) {
-        String sql = "SELECT * from locacao where dataHorario = ?";
+    public Locacao getBydataHorario(LocalDateTime diaHora, String cnpj) {
+        String sql = "SELECT * from locacao where dataHorario = ? AND cnpjLocadora = ?";
         Locacao locacao = null;
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
             String stringDiaHora = diaHora.toString();
             statement.setString(1, stringDiaHora);
+            statement.setString(2, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String cpfCliente = resultSet.getString("cpfCliente");
+                String cnpjLocadora = resultSet.getString("cnpjLocadora");
 
+                locacao = new Locacao(id, cpfCliente, cnpjLocadora, diaHora);
+            }
+
+            resultSet.close();
+            statement.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return locacao;
+    }
+
+    public Locacao getBydataHorarioCpf(LocalDateTime diaHora, String cpf) {
+        String sql = "SELECT * from locacao where dataHorario = ? AND cpfCliente = ?";
+        Locacao locacao = null;
+        try {
+            Connection con = this.getConnection();
+            PreparedStatement statement = con.prepareStatement(sql);
+            String stringDiaHora = diaHora.toString();
+            statement.setString(1, stringDiaHora);
+            statement.setString(2, cpf);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Long id = resultSet.getLong("id");

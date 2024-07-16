@@ -23,6 +23,7 @@ import domain.Cliente;
 import domain.Locacao;
 import domain.Locadora;
 import service.EmailService;
+import utils.DataUtils;
 
 @WebServlet(urlPatterns = "/cliente/*")
 public class ControllerCliente extends HttpServlet {
@@ -112,9 +113,12 @@ public class ControllerCliente extends HttpServlet {
             throws ServletException, IOException {
         List<Locadora> loc = daoLocadora.getAll();
         request.setAttribute("listaLocadora", loc);
+        LocalDateTime dataAtual = LocalDateTime.now();
+        request.setAttribute("dataAtual", DataUtils.parseLocalDate(dataAtual));
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/novoLocacao.jsp");
         dispatcher.forward(request, response);
     }
+
 
     // insere Locadora no banco de dados
     private void inserirLocacao(HttpServletRequest request, HttpServletResponse response)
@@ -129,12 +133,16 @@ public class ControllerCliente extends HttpServlet {
         
         Locadora locadora = daoLocadora.getByCnpj(cnpjLocadora);
         String emailLocadora = locadora.getEmail();
-
-        Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
-        // System.out.println(novaLocacao.getCnpjLocadora());
-        // System.out.println(novaLocacao.getCpfCliente());
-        // System.out.println(novaLocacao.getRegistro());
-        Boolean funcionou = daoLocacao.insert(novaLocacao);
+        if(!DataUtils.checkFullHour(dtDiaHora)){
+            String errorMessage = URLEncoder.encode("O registro deve estar na hora cheia (ex: 13:00, 15:00).", StandardCharsets.UTF_8.toString());
+            response.sendRedirect("novoLocacao?error=" + errorMessage);
+            return;
+        }
+        Locacao novaLocacao =  new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
+        
+       
+        
+        Boolean funcionou = daoLocacao.insert(novaLocacao );
         if (funcionou) {
 
             EmailService.sendEmail(email, "Locacao Feita ("+dataHora+")", "Sua locacao foi feita com sucesso!");
@@ -143,7 +151,7 @@ public class ControllerCliente extends HttpServlet {
         } else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",
                     StandardCharsets.UTF_8.toString());
-            response.sendRedirect(request.getContextPath() + "/locacaoView/locacao/list?error=" + errorMessage);
+            response.sendRedirect("novoLocacao?error=" + errorMessage);
         }
 
     }
