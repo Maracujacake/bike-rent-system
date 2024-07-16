@@ -35,7 +35,7 @@ execute com mvn clean package tomcat7:run-war
 
 - mandar emails pos locacao -> Ivan &#x2611;
 
-- requisito 7 ? &#x2610;
+- requisito 7 ? -> ivan &#x2610;
 
 - terminar traducoes adicionar botao para mudar linguagem das paginas -> Chris &#x2610;
 
