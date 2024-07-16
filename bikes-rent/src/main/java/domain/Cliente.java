@@ -2,6 +2,8 @@ package domain;
 
 import java.sql.Date;
 
+import utils.DataUtils;
+
 public class Cliente {
 	private Long Id;
 	private String Email;
@@ -10,6 +12,7 @@ public class Cliente {
 	private String Telefone;
 	private String Sexo;
 	private Date DataNascimento;
+	private String dataFormatada;
 	private String cpf;
 
 	public Cliente(Long id, String email, String senha, String nome, String telefone, String sexo,
@@ -22,6 +25,7 @@ public class Cliente {
 		this.Sexo = sexo;
 		this.DataNascimento = dataNascimento;
 		this.cpf = cpf;
+		setDataFormatada();
 	}
 
 	public Cliente(String email, String senha, String nome, String telefone, String sexo,
@@ -33,6 +37,7 @@ public class Cliente {
 		this.Sexo = sexo;
 		this.DataNascimento = dataNascimento;
 		this.cpf = cpf;
+		setDataFormatada();
 	}
 
 	public Long getId() {
@@ -89,6 +94,7 @@ public class Cliente {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.DataNascimento = dataNascimento;
+		setDataFormatada();
 	}
 
 	public String getCpf() {
@@ -99,4 +105,11 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
+	public String getDataFormatada() {
+		return DataUtils.getformatDate(DataNascimento);
+	}
+
+	public void setDataFormatada() {
+		this.dataFormatada = DataUtils.getformatDate(DataNascimento);;
+	}
 }

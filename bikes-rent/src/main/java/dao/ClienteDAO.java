@@ -6,12 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import domain.Cliente;
 import domain.Locacao;
+import utils.DataUtils;
 
 public class ClienteDAO extends GenericDAO {
 
@@ -116,7 +121,7 @@ public class ClienteDAO extends GenericDAO {
     /********* update LOCAÇÃO by CPF *********/
     public void updateLocacao(Locacao locacao) {
         String sql = "UPDATE locacao SET cpfCliente = ?, cnpjLocadora = ?, dataHorario = ? WHERE id = ?";
-        String dtDiaHora = locacao.getRegistro().toString();
+        String dtDiaHora = locacao.getRegistroAsDateTime().toString();
         try {
             Connection con = this.getConnection();
             PreparedStatement statement = con.prepareStatement(sql);
@@ -153,7 +158,8 @@ public class ClienteDAO extends GenericDAO {
                 String sexo = resultSet.getString("sexo");
                 String cpf = resultSet.getString("cpf");
                 Date dataNascimento = resultSet.getDate("dataNascimento");
-
+                // Formatar a data para String no formato desejado
+              
                 Cliente cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
                 listaClientes.add(cliente);
             }
@@ -223,8 +229,20 @@ public class ClienteDAO extends GenericDAO {
                 String sexo = resultSet.getString("sexo");
                 String cpf = resultSet.getString("cpf");
                 Date dataNascimento = resultSet.getDate("dataNascimento");
+                
+                // Formatar a data para String no formato desejado
+                SimpleDateFormat formatoDesejado = new SimpleDateFormat("dd/MM/yyyy");
+                String dataFormatada = formatoDesejado.format(dataNascimento);
 
-                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
+                // Converter de volta para Date, se necessário
+                Date dataNascimentoFormatada = null;
+                try {
+                    dataNascimentoFormatada = (Date) formatoDesejado.parse(dataFormatada);
+                } catch (ParseException e) {            
+                    e.printStackTrace();
+                }
+                System.out.print(dataNascimentoFormatada);
+                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimentoFormatada);
             }
 
             resultSet.close();

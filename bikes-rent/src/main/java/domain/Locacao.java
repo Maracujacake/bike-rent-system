@@ -1,6 +1,8 @@
 package domain;
 import java.time.LocalDateTime;
 
+import utils.DataUtils;
+
 
 public class Locacao {
     private Long id;
@@ -45,9 +47,14 @@ public class Locacao {
         this.cnpjLocadora = cnpjLocadora;
     }
 
-    public LocalDateTime getRegistro() {
+    public String getRegistro() {
+        return DataUtils.formatLocalDateTime(registro);
+    }
+
+    public LocalDateTime getRegistroAsDateTime() {
         return registro;
     }
+
 
     public void setRegistro(LocalDateTime registro) {
         if (registro.getMinute() != 0 || registro.getSecond() != 0 || registro.getNano() != 0) {

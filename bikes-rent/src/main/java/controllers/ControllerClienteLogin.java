@@ -39,7 +39,7 @@ public class ControllerClienteLogin extends HttpServlet {
                 String redirectTo = (String) session.getAttribute("redirectTo");
                 if (redirectTo != null) {
                     session.removeAttribute("redirectTo");
-                    response.sendRedirect(request.getContextPath() + redirectTo);
+                    response.sendRedirect(redirectTo);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/cliente/");
                 }

@@ -17,7 +17,7 @@ public class GenericDAO {
 
     protected Connection getConnection() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/bikeRentSystem?serverTimezone=America/New_York";
+        String url = "jdbc:mysql://localhost:3306/bikeRentSystem?serverTimezone=America/Sao_Paulo";
         Dotenv dotenv = Dotenv.load();
 
         String dbpass= dotenv.get("DB_PASSWORD");

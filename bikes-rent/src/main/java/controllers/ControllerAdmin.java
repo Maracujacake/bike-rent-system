@@ -16,6 +16,7 @@ import dao.ClienteDAO;
 import dao.LocadoraDAO;
 import domain.Cliente;
 import domain.Locadora;
+import utils.DataUtils;
 
 @WebServlet(urlPatterns = "/admin/*")
 public class ControllerAdmin extends HttpServlet {
@@ -109,13 +110,8 @@ public class ControllerAdmin extends HttpServlet {
     private void listarClientes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Cliente> listaCliente = dao.getAll();
-
-        /*
-         * TESTE
-         * for(Cliente pessoa : listaCliente){
-         * System.out.println(pessoa.getDataNascimento());
-         * }
-         */
+        
+         
         request.setAttribute("listaCliente", listaCliente);
         // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
         // webapp é a ''raiz''
