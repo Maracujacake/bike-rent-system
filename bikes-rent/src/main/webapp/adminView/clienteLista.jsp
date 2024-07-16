@@ -33,7 +33,7 @@
                         <c:forEach var="cliente" items="${listaCliente}">
                             <tr class="border-b border-gray-300">
                                 <td class="border border-gray-300 px-4 py-2">${cliente.nome}</td>
-                                <td class="border border-gray-300 px-4 py-2">${cliente.dataNascimento}</td>
+                                <td class="border border-gray-300 px-4 py-2">${cliente.dataFormatada}</td>
                                 <td class="border border-gray-300 px-4 py-2">${cliente.sexo}</td>
                                 <td class="border border-gray-300 px-4 py-2">${cliente.id}</td>
                                 <td class="border border-gray-300 px-4 py-2">
