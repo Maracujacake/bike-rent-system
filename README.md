@@ -35,7 +35,7 @@ execute com mvn clean package tomcat7:run-war
 
 - mandar emails pos locacao -> Ivan &#x2611;
 
-- requisito 7 ? -> ivan &#x2610;
+- requisito 7 ? -> ivan &#x2611;
 
 - terminar traducoes adicionar botao para mudar linguagem das paginas -> Chris &#x2610;
 
@@ -50,6 +50,9 @@ execute com mvn clean package tomcat7:run-war
 - Listar todas locacoes na parte de admin. &#x2610;
 
 - Remover possibilidade de adicionar locacao como locadora(apenas clientes podem adicionar locacoes) &#x2610;
+
+- Botao para voltar para Home em todas telas. &#x2610;
+
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
 
