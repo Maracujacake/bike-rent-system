@@ -37,11 +37,7 @@ public class LocadoraLoginDAO extends GenericDAO{
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("ID: " + locadora.getId());
-        System.out.println("Nome: " + locadora.getNome());
-        System.out.println("CNPJ: " + locadora.getCnpj());
-        System.out.println("Cidade: " + locadora.getCidade());
-        System.out.println("Email: " + locadora.getEmail());
+
         return locadora;
     }
 }

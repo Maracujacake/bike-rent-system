@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login</title>

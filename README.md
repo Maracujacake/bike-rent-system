@@ -25,9 +25,9 @@ execute com mvn clean package tomcat7:run-war
 
 - formatar horário locação -> Ivan &#x2611;
 
-- mostrar que login falhou (talvez ja arrumamos k) &#x2610;
+- mostrar que login falhou -> ivan &#x2611;
 
-- tirar o adicionar locacao como locadora &#x2610;
+- tirar o adicionar locacao como locadora  -> ivan &#x2610;
 
 - editar propria locadora -> Chris &#x2610;
 
@@ -56,3 +56,4 @@ execute com mvn clean package tomcat7:run-war
 
 - ## Obs 
 - Para mudar a caixinha é so trocar por &#x2611 terminado com ;
+- Alguns erros apareceram no console referentes a diferença de versões/compatibilidade com a dependencia de mandar email, porem nao afeta o funcionamento do sistema.
