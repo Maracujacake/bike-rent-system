@@ -82,7 +82,6 @@
 
             <div class="flex justify-around">
                 <a href="${pageContext.request.contextPath}/locadora/list" class="text-blue-500 hover:underline">Ver locadoras</a>
-                <a href="${pageContext.request.contextPath}/cliente/novoLocacao" class="text-green-500 hover:underline">Adicionar Locação</a>
             </div>
         </div>
     </div>

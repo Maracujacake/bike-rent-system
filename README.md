@@ -27,7 +27,7 @@ execute com mvn clean package tomcat7:run-war
 
 - mostrar que login falhou -> ivan &#x2611;
 
-- tirar o adicionar locacao como locadora  -> ivan &#x2610;
+- tirar o adicionar locacao como locadora  -> ivan &#x2611;
 
 - editar propria locadora -> Chris &#x2610;
 
@@ -47,9 +47,9 @@ execute com mvn clean package tomcat7:run-war
 
 - Listar locadoras para o admin, e a possibilidade dele editar, deletar. -> Carol &#x2610;
 
-- Listar todas locacoes na parte de admin. &#x2610;
+- Listar todas locacoes na parte de admin. &#x2611;
 
-- Botao para voltar para Home em todas telas. &#x2611;
+- Botao para voltar para Home em todas telas. -> ivan &#x2611;
 
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
