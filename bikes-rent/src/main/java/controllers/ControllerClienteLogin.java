@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +46,8 @@ public class ControllerClienteLogin extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/cliente/");
                 }
             } else {
-                response.sendRedirect(request.getContextPath() + "/login/loginCliente.jsp");
+                String errorMessage = URLEncoder.encode("Senha ou email invalidos!", StandardCharsets.UTF_8.toString());
+                response.sendRedirect(request.getContextPath() + "/login/loginCliente.jsp?error=" +errorMessage);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
