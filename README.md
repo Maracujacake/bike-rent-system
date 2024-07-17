@@ -49,9 +49,7 @@ execute com mvn clean package tomcat7:run-war
 
 - Listar todas locacoes na parte de admin. &#x2610;
 
-- Remover possibilidade de adicionar locacao como locadora(apenas clientes podem adicionar locacoes) &#x2610;
-
-- Botao para voltar para Home em todas telas. &#x2610;
+- Botao para voltar para Home em todas telas. &#x2611;
 
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
