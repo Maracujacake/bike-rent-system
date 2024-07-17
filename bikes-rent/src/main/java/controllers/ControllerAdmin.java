@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
+import dao.LocacaoDAO;
 import dao.LocadoraDAO;
 import domain.Cliente;
+import domain.Locacao;
 import domain.Locadora;
 import utils.DataUtils;
 
@@ -24,12 +26,12 @@ public class ControllerAdmin extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDAO dao;
     private LocadoraDAO dao2;
-
+    private LocacaoDAO dao3;
     @Override
     public void init() {
         dao = new ClienteDAO();
         dao2 = new LocadoraDAO();
-
+        dao3 = new LocacaoDAO();
     }
 
     @Override
@@ -88,6 +90,11 @@ public class ControllerAdmin extends HttpServlet {
                     deletarLocadora(request, response);
                     break;
 
+                //Locacoes
+                case "/listLocacoes":
+                    listLocacoes(request, response);
+                    break;
+
                 default:
                     paginaInicial(request, response);
                     break;
@@ -95,6 +102,17 @@ public class ControllerAdmin extends HttpServlet {
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
+    }
+
+    private void listLocacoes(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        List<Locacao> listaLocacoes = dao3.getAll();
+        listaLocacoes.forEach(locacao -> {
+            System.out.println("CPF LOCACAO: " + locacao.getCpfCliente());
+        });
+        request.setAttribute("listaLoc", listaLocacoes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/locacaoLista.jsp");
+        dispatcher.forward(request, response);
+       
     }
 
     // Página inicial

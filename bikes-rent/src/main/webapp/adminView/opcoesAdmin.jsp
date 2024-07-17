@@ -52,6 +52,12 @@
             <ul class="space-y-4">
                 <li>
                     <!-- Mostra todos os clientes -->
+                    <a href="${pageContext.request.contextPath}/admin/listLocacoes"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Listar todas locacoes</a>
+                </li>
+                <li>
+                    <!-- Mostra todos os clientes -->
                     <a href="${pageContext.request.contextPath}/admin/listCliente"
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
                     >Listar todos os clientes</a>
