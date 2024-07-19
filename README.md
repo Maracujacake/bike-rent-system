@@ -45,9 +45,9 @@ execute com mvn clean package tomcat7:run-war
 
 - lista de locações da locadora faltando a parte de opções e cpf do cliente talvez. -> Carol &#x2610;
 
-- Listar locadoras para o admin, e a possibilidade dele editar, deletar. -> Carol &#x2610;
+- Listar locadoras para o admin, e a possibilidade dele editar, deletar. -> Carol &#x2611;
 
-- Listar todas locacoes na parte de admin. &#x2610;
+- Listar todas locacoes na parte de admin. -> Carol &#x2610;
 
 - Botao para voltar para Home em todas telas. -> ivan &#x2611;
 
