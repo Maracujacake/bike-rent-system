@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 import dao.LocadoraDAO;
 import domain.Locadora;
@@ -64,7 +66,19 @@ public class ControllerLocadora extends HttpServlet {
                 case "/procurarByCidade":
                     procuraLocadoraByCidade(request, response);
                     break;
-
+                case "/editarDados":
+                    editarDados(request, response);
+                    break;    
+                case "/editarLocadora":
+                    editarLocadoraForm(request, response);
+                    break;
+                case "/atualizarLocadora":
+                    atualizarLocadora(request, response);
+                    break;
+                // deletar
+                case "/deletarLocadora":
+                    deletarLocadora(request, response);
+                    break;
                 default:
                     paginaInicial(request, response);
                     break;
@@ -178,6 +192,54 @@ public class ControllerLocadora extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        dao.delete(id);
+        response.sendRedirect("");
+    }
+
+    private void editarDados(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession(false);
+        Locadora LocadoraExistente = dao.get((session.getAttribute("email")).toString());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/editarLocadora.jsp");
+        request.setAttribute("Locadora", LocadoraExistente);
+        dispatcher.forward(request, response);
+    }     
+
+      private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Locadora LocadoraExistente = dao.get(id);
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession(false);
+        if(LocadoraExistente.getEmail().equals(session.getAttribute("email"))){
+             RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/editarLocadora.jsp");
+             request.setAttribute("Locadora", LocadoraExistente);
+             dispatcher.forward(request, response);
+        }
+        else{
+            // redireciona para a pagina em Locadora/list
+            response.sendRedirect("");
+        }
+    }       
+
+    // atualiza informações de Locadora no banco de dados
+    private void atualizarLocadora(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String cidade = request.getParameter("cidade");
+        String cnpj = request.getParameter("cnpj");
+
+        Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
+        dao.update(LocadoraAtualizado);
+        response.sendRedirect("");
+    }
     // busca locadora por cidade DE FATO no banco
     private void procuraLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

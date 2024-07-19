@@ -9,7 +9,6 @@ import domain.Locadora;
 
 public class LocadoraLoginDAO extends GenericDAO{
     
-
     public Locadora authLocadora(String email, String senha) {
         String sql = "SELECT * FROM locadora WHERE email = ? AND senha = ?";
         Locadora locadora = null;

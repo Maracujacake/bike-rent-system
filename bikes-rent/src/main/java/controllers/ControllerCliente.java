@@ -81,6 +81,13 @@ public class ControllerCliente extends HttpServlet {
                 case "/inserir":
                     inserirCliente(request, response);
                     break;
+                case "/editarDados":
+                    editarDados(request, response);
+                    break;   
+                 case "/atualizarCliente":
+                    atualizarCliente(request, response);
+                    break;
+ 
 
                 // LOCACAO
                 case "/novoLocacao":
@@ -259,5 +266,33 @@ public class ControllerCliente extends HttpServlet {
         // redireciona para a pagina de locacoes de cliente
         response.sendRedirect("clienteCPF");
     }
+
+     private void editarDados(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession(false);
+        Cliente clienteExistente = dao.get((session.getAttribute("email")).toString());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/editarCliente.jsp");
+        request.setAttribute("cliente", clienteExistente);
+        dispatcher.forward(request, response);
+    }     
+
+    private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String telefone = request.getParameter("telefone");
+        String sexo = request.getParameter("sexo");
+        String cpf = request.getParameter("cpf");
+        String dataNascimento = request.getParameter("dataNascimento");
+
+        Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf,
+                java.sql.Date.valueOf(dataNascimento));
+        dao.update(clienteAtualizado);
+        response.sendRedirect("listCliente");
+    }
+
 
 }

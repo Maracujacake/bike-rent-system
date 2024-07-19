@@ -231,7 +231,7 @@ public class ClienteDAO extends GenericDAO {
                 Date dataNascimento = resultSet.getDate("dataNascimento");
                 
                 // Formatar a data para String no formato desejado
-                SimpleDateFormat formatoDesejado = new SimpleDateFormat("dd/MM/yyyy");
+              /*  SimpleDateFormat formatoDesejado = new SimpleDateFormat("dd/MM/yyyy");
                 String dataFormatada = formatoDesejado.format(dataNascimento);
 
                 // Converter de volta para Date, se necessário
@@ -241,8 +241,8 @@ public class ClienteDAO extends GenericDAO {
                 } catch (ParseException e) {            
                     e.printStackTrace();
                 }
-                System.out.print(dataNascimentoFormatada);
-                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimentoFormatada);
+                System.out.print(dataNascimentoFormatada);*/
+                cliente = new Cliente(id, email, senha, nome, telefone, sexo, cpf, dataNascimento);
             }
 
             resultSet.close();

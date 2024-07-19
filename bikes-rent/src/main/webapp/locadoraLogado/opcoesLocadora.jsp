@@ -55,8 +55,12 @@
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
                     >Listar suas locações</a>
                 </li>
-
-
+                <li>
+                    <!-- manda para edicao de formulario com mesmo email que o do usuario logado -->
+                    <a href="${pageContext.request.contextPath}/locadora/editarDados"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Editar dados da sua locadora</a>
+                </li>
                 <li>
                     <!-- manda para formulário de criação de locação -->
                     <a href="${pageContext.request.contextPath}/"
