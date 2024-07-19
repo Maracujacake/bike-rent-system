@@ -40,7 +40,8 @@ public class ControllerLocadora extends HttpServlet {
 
         try {
             switch (action) {
-                // create
+
+                // CREATE
                 case "/novo":
                     novoLocadoraForm(request, response);
                     break;
@@ -48,7 +49,7 @@ public class ControllerLocadora extends HttpServlet {
                     inserirLocadora(request, response);
                     break;
 
-                // read
+                // READ
                 case "/list":
                     listarLocadoras(request, response);
                     break;
@@ -81,16 +82,16 @@ public class ControllerLocadora extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // Funções de CREATE
+    // *** Funções de CREATE ***
 
-    // apresenta formulário de criação de Locadora
+    // Apresenta formulário de criação de Locadora
     private void novoLocadoraForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/novoLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
-    // insere Locadora no banco de dados
+    // Insere Locadora no banco de dados
     private void inserirLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nome = request.getParameter("nome");
@@ -112,37 +113,26 @@ public class ControllerLocadora extends HttpServlet {
 
     }
 
-    // Funções de READ
+    // *** Funções de READ ***
 
-    // Apresenta todos os Locadoras
+    // Apresenta todas as Locadoras
     private void listarLocadoras(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Locadora> listaLocadora = dao.getAll();
-
-        /*
-         * TESTE
-         * for(Locadora pessoa : listaLocadora){
-         * System.out.println(pessoa.getDataNascimento());
-         * }
-         */
-
         request.setAttribute("listaLocadora", listaLocadora);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/locadoraLista.jsp");
         dispatcher.forward(request, response);
 
     }
 
-    // apresenta formulário de busca de Locadora
+    // Apresenta formulário de busca de Locadora
     private void paginaBuscarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Teste de conexão: System.out.println("cade a pagina fi");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/buscaLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
-    // procura Locadora pelo seu ID no banco
+    // Procura Locadora pelo seu ID no banco
     private void procuraLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idLocadora = request.getParameter("id");
@@ -171,14 +161,14 @@ public class ControllerLocadora extends HttpServlet {
         }
     }
 
-    // apresenta formulário de busca de Locadora por cidade
+    // Apresenta formulário de busca de Locadora por cidade
     private void buscaLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraView/buscaLocadoraByCidade.jsp");
         dispatcher.forward(request, response);
     }
 
-    // busca locadora por cidade DE FATO no banco
+    // Busca locadora por cidade DE FATO no banco
     private void procuraLocadoraByCidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String Cidade = request.getParameter("cidade");

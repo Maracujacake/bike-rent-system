@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Opções</title>
+    <title>Editar Cliente</title>
 </head>
-									<!-- MOSTRA TODAS AS OPÇÕES REFERENTES A LOCADORA-->
 <body class="bg-gray-100">
     <nav class="bg-white border-gray-200 dark:bg-gray-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -46,34 +44,38 @@
         </div>
     </nav>
     <div class="flex justify-center items-center h-screen">
-        <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a) ${sessionScope.nome}!</h2>
-            <ul class="space-y-4">
-                <li>
-                    <!-- manda para formulário de CPF para busca de locações -->
-                    <a href="${pageContext.request.contextPath}/locadoraLogged/locacoesCNPJ"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Listar suas locações</a>
-                </li>
+        <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">Editar Cliente</h2>
+            <form action="${pageContext.request.contextPath}/locadoraLogged/atualizarLocadora" method="post" class="space-y-4">
 
-                <li>
-                    <!-- opção de editar as próprias informações -->
-                    <a href="${pageContext.request.contextPath}/locadoraLogged/editarLocadora"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Editar suas informações</a>
-                </li>
+                <input type="hidden" name="id" value="${locadora.id}">
+                <input type="hidden" name="cnpj" value="${locadora.cnpj}">
 
+                <div>
+                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome:</label>
+                    <input type="text" name="nome" value="${locadora.nome}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-                <li>
-                    <!-- manda para formulário de criação de locação -->
-                    <a href="${pageContext.request.contextPath}/"
-                    class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
-                    >Voltar à página inicial</a>
-                </li>
-            </ul>
+                <div>
+                    <label for="senha" class="block text-sm font-medium text-gray-700">Senha:</label>
+                    <input type="text" name="senha" value="${locadora.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="text" name="email" value="${locadora.email}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="cidade" class="block text-sm font-medium text-gray-700">Cidade:</label>
+                    <input type="text" name="cidade" value="${locadora.cidade}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Atualizar</button>
+                </div>
+            </form>
         </div>
     </div>
-
 </body>
-
 </html>

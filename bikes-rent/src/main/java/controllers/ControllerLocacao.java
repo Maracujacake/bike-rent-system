@@ -44,31 +44,22 @@ public class ControllerLocacao extends HttpServlet {
 
         try {
             switch (action) {
-                // criação está em cliente e em admin
+                // Criação de locação se encontram em cliente e admin
 
-                // read
+                // READ
                 case "/list":
                     listarLocacoes(request, response);
                     break;
-                /*
-                 * case "/buscaLocacaoByCPF":
-                 * listarLocacoesByCPF(request, response);
-                 * break;
-                 */
 
-                /*
-                 * case "/buscaLocacaoByCNPJ":
-                 * listarLocacoesByCNPJ(request, response);
-                 * break;
-                 */
                 case "/buscarLocacao":
                     paginaBuscarLocacao(request, response);
                     break;
+
                 case "/procurar":
                     procuraLocacao(request, response);
                     break;
 
-                // update
+                // UPDATE
                 case "/editar":
                     editarLocacaoForm(request, response);
                     break;
@@ -76,6 +67,7 @@ public class ControllerLocacao extends HttpServlet {
                     atualizarLocacao(request, response);
                     break;
 
+                // Delete está em cliente e admin
                 default:
                     paginaInicial(request, response);
                     break;
@@ -94,57 +86,19 @@ public class ControllerLocacao extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // Funções de READ
+    // *** Funções de READ ***
+
     // Apresenta todas as Locações
     private void listarLocacoes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Locacao> listaLocacao = dao.getAll();
-
         request.setAttribute("listaLocacao", listaLocacao);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/locacaoLista.jsp");
         dispatcher.forward(request, response);
 
     }
 
-    /*
-     * falta
-     * // Apresenta todas as Locações por CPF
-     * private void listarLocacoesByCPF(HttpServletRequest request,
-     * HttpServletResponse response)
-     * throws ServletException, IOException {
-     * List<Locacao> listaLocacao = dao.getAll();
-     * 
-     * request.setAttribute("listaLocacao", listaLocacao);
-     * // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-     * // webapp é a ''raiz''
-     * RequestDispatcher dispatcher =
-     * request.getRequestDispatcher("/locacaoLista.jsp");
-     * dispatcher.forward(request, response);
-     * 
-     * }
-     */
-
-    /*
-     * falta
-     * // Apresenta todas as Locações por CNPJ
-     * private void listarLocacoesByCNPJ(HttpServletRequest request,
-     * HttpServletResponse response)
-     * throws ServletException, IOException {
-     * List<Locacao> listaLocacao = dao.getAll();
-     * 
-     * request.setAttribute("listaLocacao", listaLocacao);
-     * // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-     * // webapp é a ''raiz''
-     * RequestDispatcher dispatcher =
-     * request.getRequestDispatcher("/locacaoLista.jsp");
-     * dispatcher.forward(request, response);
-     * 
-     * }
-     */
-
-    // apresenta formulário de busca de Locadora
+    // Apresenta formulário de busca de Locadora
     private void paginaBuscarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Teste de conexão: System.out.println("cade a pagina fi");
@@ -152,7 +106,7 @@ public class ControllerLocacao extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // procura Locadora pelo seu ID no banco
+    // Procura Locadora pelo seu ID no banco
     private void procuraLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idLocadora = request.getParameter("id");
@@ -177,9 +131,9 @@ public class ControllerLocacao extends HttpServlet {
         }
     }
 
-    // Funções de UPDATE
-    // apresenta formulário de edição de Locadora com informações referentes ao seu
-    // id
+    // *** Funções de UPDATE ***
+
+    // Apresenta formulário de edição de Locacao com informações referentes ao seu id
     private void editarLocacaoForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -189,7 +143,7 @@ public class ControllerLocacao extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // atualiza informações de Locadora no banco de dados
+    // Atualiza informações de Locadora no banco de dados
     private void atualizarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import domain.Cliente;
 
+// ** Verificação de Login de CLIENTE
 public class ClienteLoginDAO extends GenericDAO{
     
 

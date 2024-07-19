@@ -11,6 +11,7 @@ import java.util.List;
 
 import domain.Locacao;
 
+// ** FUnções com acesso ao banco de LOCACAO
 public class LocacaoDAO extends GenericDAO {
 
     // CREATE

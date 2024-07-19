@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 import domain.Locadora;
 
+// ** Verificação de Login de LOCADORA
 public class LocadoraLoginDAO extends GenericDAO{
     
-
     public Locadora authLocadora(String email, String senha) {
         String sql = "SELECT * FROM locadora WHERE email = ? AND senha = ?";
         Locadora locadora = null;

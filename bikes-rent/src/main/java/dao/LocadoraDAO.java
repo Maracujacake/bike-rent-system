@@ -12,6 +12,7 @@ import java.util.List;
 import domain.Locacao;
 import domain.Locadora;
 
+// ** Funções com acesso ao banco de LOCADORA
 public class LocadoraDAO extends GenericDAO {
     // CREATE
     public Boolean insert(Locadora Locadora) {

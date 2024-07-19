@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.LocadoraDAO;
 import dao.LocadoraLoginDAO;
 import domain.Locadora;
 
@@ -20,13 +19,10 @@ import domain.Locadora;
 public class ControllerLocadoraLogin extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private LocadoraLoginDAO dao;
-    private LocadoraDAO daoLocadora;
 
     @Override
     public void init() {
         dao = new LocadoraLoginDAO();
-        daoLocadora = new LocadoraDAO();
-        // System.out.println("ALO"); teste de inicialização
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
