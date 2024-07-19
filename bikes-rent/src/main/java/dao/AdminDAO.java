@@ -17,6 +17,7 @@ public class AdminDAO extends GenericDAO {
             statement.setString(1, email);
             statement.setString(2, senha);
 
+
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Long id = resultSet.getLong("id");
