@@ -24,14 +24,14 @@ import utils.DataUtils;
 public class ControllerAdmin extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private ClienteDAO dao;
-    private LocadoraDAO dao2;
-    private LocacaoDAO dao3;
+    private ClienteDAO clienteDao;
+    private LocadoraDAO locadoraDao;
+    private LocacaoDAO locacaoDao;
     @Override
     public void init() {
-        dao = new ClienteDAO();
-        dao2 = new LocadoraDAO();
-        dao3 = new LocacaoDAO();
+        clienteDao = new ClienteDAO();
+        locadoraDao = new LocadoraDAO();
+        locacaoDao = new LocacaoDAO();
     }
 
     @Override
@@ -49,10 +49,14 @@ public class ControllerAdmin extends HttpServlet {
         }
 
         try {
+            System.out.println(action);
             switch (action) {
 
                 // CLIENTE
                 // read
+                case "/listLocadora":
+                    listLocadora(request, response);
+                    break;
                 case "/listCliente":
                     listarClientes(request, response);
                     break;
@@ -104,8 +108,16 @@ public class ControllerAdmin extends HttpServlet {
         }
     }
 
+
+    private void listLocadora(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Locadora> listaLocadoras = locadoraDao.getAll();
+        request.setAttribute("listaLocadora", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/locadoraLista.jsp");
+        dispatcher.forward(request, response);
+    }
+
     private void listLocacoes(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        List<Locacao> listaLocacoes = dao3.getAll();
+        List<Locacao> listaLocacoes = locacaoDao.getAll();
         listaLocacoes.forEach(locacao -> {
             System.out.println("CPF LOCACAO: " + locacao.getCpfCliente());
         });
@@ -127,7 +139,7 @@ public class ControllerAdmin extends HttpServlet {
     // Apresenta todos os clientes
     private void listarClientes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Cliente> listaCliente = dao.getAll();
+        List<Cliente> listaCliente = clienteDao.getAll();
         
          
         request.setAttribute("listaCliente", listaCliente);
@@ -153,8 +165,7 @@ public class ControllerAdmin extends HttpServlet {
         if (idCliente != null) {
             try {
                 long id = Long.parseLong(idCliente);
-                Cliente cliente = dao.get(id);
-                System.out.println(cliente == null);
+                Cliente cliente = clienteDao.get(id);
                 if (cliente != null) {
                     request.setAttribute("clienteEspecifico", cliente);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/clienteEspecifico.jsp");
@@ -177,7 +188,7 @@ public class ControllerAdmin extends HttpServlet {
     private void editarClienteForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Cliente clienteExistente = dao.get(id);
+        Cliente clienteExistente = clienteDao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/editarCliente.jsp");
         request.setAttribute("cliente", clienteExistente);
         dispatcher.forward(request, response);
@@ -197,7 +208,7 @@ public class ControllerAdmin extends HttpServlet {
 
         Cliente clienteAtualizado = new Cliente(id, email, senha, nome, telefone, sexo, cpf,
                 java.sql.Date.valueOf(dataNascimento));
-        dao.update(clienteAtualizado);
+        clienteDao.update(clienteAtualizado);
         response.sendRedirect("listCliente");
     }
 
@@ -206,7 +217,7 @@ public class ControllerAdmin extends HttpServlet {
     private void deletarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        dao.delete(id);
+        clienteDao.delete(id);
         // redireciona para a pagina em cliente/list
         response.sendRedirect("listCliente");
     }
@@ -218,7 +229,7 @@ public class ControllerAdmin extends HttpServlet {
     private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Locadora LocadoraExistente = dao2.get(id);
+        Locadora LocadoraExistente = locadoraDao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/editarLocadora.jsp");
         request.setAttribute("Locadora", LocadoraExistente);
         dispatcher.forward(request, response);
@@ -235,7 +246,7 @@ public class ControllerAdmin extends HttpServlet {
         String cnpj = request.getParameter("cnpj");
 
         Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
-        dao2.update(LocadoraAtualizado);
+        locadoraDao.update(LocadoraAtualizado);
         response.sendRedirect("listCliente");
     }
 
@@ -244,7 +255,7 @@ public class ControllerAdmin extends HttpServlet {
     private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        dao2.delete(id);
+        locadoraDao.delete(id);
         // redireciona para a pagina em Locadora/list
         response.sendRedirect("");
     }
