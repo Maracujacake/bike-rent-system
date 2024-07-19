@@ -51,6 +51,8 @@ execute com mvn clean package tomcat7:run-war
 
 - Botao para voltar para Home em todas telas. -> ivan &#x2611;
 
+- Criar botão na tela inicial para cadastrar usuário. -> Ivan &#x2610;
+
 - ## Duvidas
 - - Locadoras tem apenas uma bicicleta ?
 
