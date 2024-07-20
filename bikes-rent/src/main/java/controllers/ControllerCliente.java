@@ -187,9 +187,6 @@ public class ControllerCliente extends HttpServlet {
         String cpf = session.getAttribute("cpf").toString();
 
         List<Locacao> listaCliente = dao.getLocacaoByCPF(cpf);
-        for (Locacao x : listaCliente) {
-            System.out.println(x.getCnpjLocadora());
-        }
         request.setAttribute("listaCliente", listaCliente);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/locacoesCliente.jsp");
         dispatcher.forward(request, response);

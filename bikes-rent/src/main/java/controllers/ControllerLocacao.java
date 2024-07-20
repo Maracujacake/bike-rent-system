@@ -101,7 +101,6 @@ public class ControllerLocacao extends HttpServlet {
     // Apresenta formulário de busca de Locadora
     private void paginaBuscarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Teste de conexão: System.out.println("cade a pagina fi");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locacaoView/buscaLocacao.jsp");
         dispatcher.forward(request, response);
     }
