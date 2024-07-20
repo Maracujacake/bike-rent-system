@@ -31,10 +31,10 @@
                          aria-current="page">Cliente</a>
                     </li>
                     <li>
-                        <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
+                        <a href="/bikes-rent/locadora/novo" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
-                            Locadora</a>
+                            Criar Locadora</a>
                     </li>
                     <li>
                         <a href="/bikes-rent/admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white
