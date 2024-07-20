@@ -75,7 +75,6 @@ public class ControllerCliente extends HttpServlet {
                 case "/clienteCPF":
                     listarClienteLocacaoByCPF(request, response);
                     break;
-                
 
                 // Update
                 case "/editarCliente":
@@ -121,7 +120,6 @@ public class ControllerCliente extends HttpServlet {
         }
     }
 
-
     // ***** LOCAÇÃO *****
 
     // *** Funções de CREATE ***
@@ -151,7 +149,8 @@ public class ControllerCliente extends HttpServlet {
         Locadora locadora = daoLocadora.getByCnpj(cnpjLocadora);
         String emailLocadora = locadora.getEmail();
         if (!DataUtils.checkFullHour(dtDiaHora)) {
-            String errorMessage = URLEncoder.encode("O registro deve estar na hora cheia (ex: 13:00, 15:00).", StandardCharsets.UTF_8.toString());
+            String errorMessage = URLEncoder.encode("O registro deve estar na hora cheia (ex: 13:00, 15:00).",
+                    StandardCharsets.UTF_8.toString());
             response.sendRedirect("novoLocacao?error=" + errorMessage);
             return;
         }
@@ -159,9 +158,10 @@ public class ControllerCliente extends HttpServlet {
 
         Boolean funcionou = daoLocacao.insert(novaLocacao);
         if (funcionou) {
-
-            EmailService.sendEmail(email, "Locacao Feita (" + dataHora + ")", "Sua locacao foi feita com sucesso!");
-            EmailService.sendEmail(emailLocadora, "Locacao Feita (" + dataHora + ")", "Um cliente realizou uma locacao com sucesso!");
+            String formatedDate = DataUtils.parseEmailData(dataHora);
+            EmailService.sendEmail(email, "Locacao Feita (" + formatedDate + ")", "Sua locacao foi feita com sucesso!");
+            EmailService.sendEmail(emailLocadora, "Locacao Feita (" + formatedDate + ")",
+                    "Um cliente realizou uma locacao com sucesso!");
             response.sendRedirect("clienteCPF");
         } else {
             String errorMessage = URLEncoder.encode("Locacao ja existe!",
@@ -191,7 +191,6 @@ public class ControllerCliente extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/clienteLogado/clienteView/locacoesCliente.jsp");
         dispatcher.forward(request, response);
     }
-
 
     // *** Funções de Update ***
 
@@ -280,7 +279,7 @@ public class ControllerCliente extends HttpServlet {
     /// *** Funções de UPDATE ***
 
     private void editarDados(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession(false);
         Cliente cliente = dao.get((session.getAttribute("email")).toString());
@@ -290,7 +289,7 @@ public class ControllerCliente extends HttpServlet {
     }
 
     private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
