@@ -41,7 +41,7 @@ execute com mvn clean package tomcat7:run-war
 
 - verificar tratativas de erros/fuçar para encontrar problemas -> TODOS &#x2610;
 
-- atualizar pagina de atualizar locacao -> Carol &#x2610;
+- atualizar pagina de atualizar locacao -> Carol &#x2611;
 
 - lista de locações da locadora faltando a parte de opções e cpf do cliente talvez. -> Carol &#x2610;
 
