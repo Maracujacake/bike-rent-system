@@ -45,7 +45,7 @@
     </nav>
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">Editar Cliente</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">Editar Locação</h2>
             <form action="${pageContext.request.contextPath}/cliente/atualizarLocacao" method="post" class="space-y-4">
                 <input type="hidden" name="id" value="${locacao.id}">
                 <input type="hidden" name="cpfCliente" value="${locacao.cpfCliente}">
