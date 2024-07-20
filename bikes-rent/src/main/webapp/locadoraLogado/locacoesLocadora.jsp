@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+<fmt:setBundle basename="message" />
         <!DOCTYPE html>
         <html>
 
@@ -35,13 +38,16 @@
                             <li>
                                 <a href="/bikes-rent/cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                                                      hover:text-blue-300 transition duration-300"
-                                    aria-current="page">Cliente</a>
+                                    aria-current="page">
+                                    <fmt:message key="cliente" />
+                                </a>
                             </li>
                             <li>
                                 <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
-                                                     md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
-                                                     transition duration-300">
-                                    Locadora</a>
+                                md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
+                                transition duration-300">
+                                    <fmt:message key="locadora" />                    
+                                </a>
                             </li>
                             <li>
                                 <a href="/bikes-rent/admin/"
@@ -55,13 +61,13 @@
             </nav>
             <div class="flex justify-center items-center h-screen">
                 <div class="max-w-4xl w-full p-8 bg-white rounded shadow-lg text-center">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Lista de Locações</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4"><fmt:message key="locacao.lista" /></h2>
                     <c:if test="${not empty listaLocadora}">
                         <table class="w-full mx-auto">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="border border-gray-300 px-4 py-2">CPF Cliente</th>
-                                    <th class="border border-gray-300 px-4 py-2">Data de Locação</th>
+                                    <th class="border border-gray-300 px-4 py-2"><fmt:message key="cliente.cpf" /></th>
+                                    <th class="border border-gray-300 px-4 py-2"><fmt:message key="locacao.data" /></th>
                                     <!-- <th class="border border-gray-300 px-4 py-2">Opções</th> -->
                                 </tr>
                             </thead>
@@ -70,25 +76,26 @@
                                     <tr class="border-b border-gray-300">
                                         <td class="border border-gray-300 px-4 py-2">${locacao.cpfCliente}</td>
                                         <td class="border border-gray-300 px-4 py-2">${locacao.registro}</td>
+                                        <!--
                                         <td class="border border-gray-300 px-4 py-2">
-                                            <!-- <a href="${pageContext.request.contextPath}/cliente/editarLocacao?id=${locacao.id}" class="text-blue-500 hover:underline">Update</a>
+                                            <a href="${pageContext.request.contextPath}/cliente/editarLocacao?id=${locacao.id}" class="text-blue-500 hover:underline">Update</a>
                                     <a href="${pageContext.request.contextPath}/cliente/deletarLocacao?id=${locacao.id}" class="text-red-500 hover:underline ml-2 delete-link">Delete</a>
-                                    -->
                                         </td>
+                                    -->
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                     </c:if>
                     <c:if test="${empty listaLocadora}">
-                        <p>Nenhuma locação encontrada.</p>
+                        <p><fmt:message key="locacao.listaVazia" /></p>
                     </c:if>
 
                     <hr class="my-4">
 
                     <div class="flex justify-around">
                         <a href="${pageContext.request.contextPath}/locadora/list"
-                            class="text-blue-500 hover:underline">Ver locadoras</a>
+                            class="text-blue-500 hover:underline"><fmt:message key="locadora.lista" /></a>
                     </div>
                 </div>
             </div>

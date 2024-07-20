@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+<fmt:setBundle basename="message" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,13 +29,16 @@
                     <li>
                         <a href="/bikes-rent/cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                          hover:text-blue-300 transition duration-300"
-                         aria-current="page">Cliente</a>
+                         aria-current="page">
+                            <fmt:message key="cliente" />
+                        </a>
                     </li>
                     <li>
                         <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
-                            Locadora</a>
+                            <fmt:message key="locadora" />
+                        </a>
                     </li>
                     <li>
                         <a href="/bikes-rent/admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white
@@ -45,19 +51,19 @@
     </nav>
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center">Editar Cliente</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center"><fmt:message key="locadora.editarLoc" /></h2>
             <form action="${pageContext.request.contextPath}/locadoraLogged/atualizarLocadora" method="post" class="space-y-4">
 
                 <input type="hidden" name="id" value="${locadora.id}">
                 <input type="hidden" name="cnpj" value="${locadora.cnpj}">
 
                 <div>
-                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome:</label>
+                    <label for="nome" class="block text-sm font-medium text-gray-700"><fmt:message key="nome" /></label>
                     <input type="text" name="nome" value="${locadora.nome}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <div>
-                    <label for="senha" class="block text-sm font-medium text-gray-700">Senha:</label>
+                    <label for="senha" class="block text-sm font-medium text-gray-700"><fmt:message key="senha" /></label>
                     <input type="text" name="senha" value="${locadora.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
@@ -67,12 +73,13 @@
                 </div>
 
                 <div>
-                    <label for="cidade" class="block text-sm font-medium text-gray-700">Cidade:</label>
+                    <label for="cidade" class="block text-sm font-medium text-gray-700"><fmt:message key="cidade" /></label>
                     <input type="text" name="cidade" value="${locadora.cidade}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Atualizar</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"><fmt:message key="atualizar" /></button>
                 </div>
             </form>
         </div>

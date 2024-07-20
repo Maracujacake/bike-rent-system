@@ -35,13 +35,16 @@
                                 <li>
                                     <a href="/bikes-rent/cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                                      hover:text-blue-300 transition duration-300"
-                                     aria-current="page">Cliente</a>
+                                     aria-current="page">
+                                     <fmt:message key="cliente" />
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                                      md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                                      transition duration-300">
-                                        Locadora</a>
+                                     <fmt:message key="locadora" />    
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="/bikes-rent/admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white
@@ -75,7 +78,7 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/locadora/buscaLocadoraByCidade"
                                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
-                                    Busca locadora por cidade
+                                    <fmt:message key="locadora.getByCidade" />
                                 </a>
                             </li>
                         </ul>

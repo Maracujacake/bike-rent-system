@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+<fmt:setBundle basename="message" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +31,14 @@
                     <li>
                         <a href="/bikes-rent/cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                          hover:text-blue-300 transition duration-300"
-                         aria-current="page">Cliente</a>
+                         aria-current="page"><fmt:message key="cliente" /></a>
                     </li>
                     <li>
                         <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
-                            Locadora</a>
+                         <fmt:message key="locadora" />
+                        </a>
                     </li>
                     <li>
                         <a href="/bikes-rent/admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white
@@ -47,19 +51,19 @@
     </nav>
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md w-full p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Olá, Administrador! Faça seu Login</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center"><fmt:message key="admin.login" /></h2>
             <form action="${pageContext.request.contextPath}/adminLogin" method="post">
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
                     <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-gray-700 font-bold mb-2">Senha:</label>
+                    <label for="password" class="block text-gray-700 font-bold mb-2"><fmt:message key="senha" /></label>
                     <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded" required>
                 </div>
                 <div class="flex items-center justify-between">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Login
+                        <fmt:message key="login" />
                     </button>
                 </div>
             </form>
