@@ -14,7 +14,9 @@ import domain.Locacao;
 // ** FUnções com acesso ao banco de LOCACAO
 public class LocacaoDAO extends GenericDAO {
 
-    // CREATE
+    // *** Funções de CREATE ***
+
+    // Cria locação
     public Boolean insert(Locacao locacao) throws SQLException {
 
         String sql = "INSERT INTO locacao (cpfCliente, cnpjLocadora, dataHorario) VALUES (?, ?, ?)";
@@ -45,7 +47,9 @@ public class LocacaoDAO extends GenericDAO {
         return true;
     }
 
-    // READ ALL
+    // *** Funções de READ ***
+
+    // Seleciona todas as locações
     public List<Locacao> getAll() {
 
         List<Locacao> listaLocacoes = new ArrayList<>();
@@ -79,7 +83,7 @@ public class LocacaoDAO extends GenericDAO {
         return listaLocacoes;
     }
 
-    // READ BY ID
+    // Seleciona locação pelo ID
     public Locacao getByID(Long Id) {
         String sql = "SELECT * from locacao where id = ?";
         Locacao locacao = null;
@@ -108,7 +112,7 @@ public class LocacaoDAO extends GenericDAO {
         return locacao;
     }
 
-    // READ BY DATAHORARIO
+    // Seleciona locação por Data-Hora e CNPJ
     public Locacao getBydataHorario(LocalDateTime diaHora, String cnpj) {
         String sql = "SELECT * from locacao where dataHorario = ? AND cnpjLocadora = ?";
         Locacao locacao = null;
@@ -136,6 +140,7 @@ public class LocacaoDAO extends GenericDAO {
         return locacao;
     }
 
+    // Seleciona locação por Data-Hora e CPF
     public Locacao getBydataHorarioCpf(LocalDateTime diaHora, String cpf) {
         String sql = "SELECT * from locacao where dataHorario = ? AND cpfCliente = ?";
         Locacao locacao = null;
@@ -163,7 +168,9 @@ public class LocacaoDAO extends GenericDAO {
         return locacao;
     }
 
-    // UPDATE
+    // *** Funções de UPDATE ***
+
+    // Atualiza locação
     public void update(Locacao locacao) {
         String sql = "UPDATE locacao SET cpfCliente = ?, cnpjLocadora = ?, dataHorario = ? WHERE id = ?";
         try {
@@ -184,7 +191,7 @@ public class LocacaoDAO extends GenericDAO {
         }
     }
 
-    // DELETE
+    // *** Funções de DELETE ***
     public void delete(Long id) {
         String sql = "DELETE FROM locacao where id = ?";
 

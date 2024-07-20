@@ -65,6 +65,13 @@
 
                 <li>
                     <!-- manda para formulário de criação de locação -->
+                    <a href="${pageContext.request.contextPath}/cliente/editarCliente"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Editar seus dados</a>
+                </li>
+
+                <li>
+                    <!-- manda para formulário de criação de locação -->
                     <a href="${pageContext.request.contextPath}/"
                     class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
                     >Voltar à página inicial</a>

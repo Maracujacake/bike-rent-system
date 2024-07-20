@@ -14,7 +14,10 @@ import domain.Locadora;
 
 // ** Funções com acesso ao banco de LOCADORA
 public class LocadoraDAO extends GenericDAO {
-    // CREATE
+
+    // *** Funções de CREATE ***
+    
+    // Cria locadora
     public Boolean insert(Locadora Locadora) {
 
         String sql = "INSERT INTO locadora (nome, email, senha, cnpj, cidade) VALUES (?, ?, ?, ?, ?)";
@@ -48,7 +51,9 @@ public class LocadoraDAO extends GenericDAO {
         return true;
     }
 
-    // READ ALL
+    // *** Funções de READ ***
+
+    // Seleciona todas as locadoras
     public List<Locadora> getAll() {
 
         List<Locadora> listaLocadoras = new ArrayList<>();
@@ -71,12 +76,6 @@ public class LocadoraDAO extends GenericDAO {
                 Locadora Locadora = new Locadora(id, senha, nome, cidade, cnpj, email);
                 listaLocadoras.add(Locadora);
             }
-
-            // teste de debug
-            // listaLocadoras.forEach(Locadora -> {
-            // System.out.println(Locadora.getDataNascimento() + " " + Locadora.getNome());
-            // });
-
             resultSet.close();
             statement.close();
             con.close();
@@ -87,7 +86,7 @@ public class LocadoraDAO extends GenericDAO {
         return listaLocadoras;
     }
 
-    // READ BY ID
+    // Seleciona locadora por ID
     public Locadora get(Long id) {
         String sql = "SELECT * from locadora where id = ?";
         Locadora Locadora = null;
@@ -119,7 +118,7 @@ public class LocadoraDAO extends GenericDAO {
         return Locadora;
     }
 
-    // READ BY Cidade
+    // Selecione locadora por cidade
     public List<Locadora> getByCidade(String cidade) {
         String sql = "SELECT * from locadora where cidade like ?";
         List<Locadora> listaLocadoras = new ArrayList<>();
@@ -153,7 +152,7 @@ public class LocadoraDAO extends GenericDAO {
         return listaLocadoras;
     }
 
-    // Get by email
+    // Seleciona locadora por email
     public Locadora get(String email) {
         String sql = "SELECT * from locadora where email = ?";
         Locadora Locadora = null;
@@ -184,7 +183,7 @@ public class LocadoraDAO extends GenericDAO {
         return Locadora;
     }
 
-    // Get by cnpj
+    // Seleciona locadora por CNPJ
     public Locadora getByCnpj(String cnpj) {
         String sql = "SELECT * from locadora where cnpj = ?";
         Locadora Locadora = null;
@@ -215,7 +214,9 @@ public class LocadoraDAO extends GenericDAO {
         return Locadora;
     }
 
-    // UPDATE
+    // *** Funções de UPDATE ***
+
+    // Atualiza locadora
     public void update(Locadora locadora) {
         String sql = "UPDATE locadora SET nome = ?, email = ?, senha = ?, cnpj = ?, cidade = ? WHERE id = ?";
         try {
@@ -236,7 +237,7 @@ public class LocadoraDAO extends GenericDAO {
         }
     }
 
-    // DELETE
+    // *** Funções de DELETE ***
     public void delete(Long id) {
         String sql = "DELETE FROM locadora where id = ?";
 
@@ -255,6 +256,8 @@ public class LocadoraDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+
+    // ***** LOCACAO *****
 
     public List<Locacao> getLocacaoByCNPJ(String cnpj) {
 

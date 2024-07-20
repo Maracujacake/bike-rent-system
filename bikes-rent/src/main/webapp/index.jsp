@@ -41,13 +41,13 @@
                     <li>
                         <a href="cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                          hover:text-blue-300 transition duration-300"
-                         aria-current="page">Cliente</a>
+                         aria-current="page"> <fmt:message key="cliente" /></a>
                     </li>
                     <li>
                         <a href="locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
-                            Locadora</a>
+                         <fmt:message key="locadora" /></a></a>
                     </li>
                     <li>
                         <a href="admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white

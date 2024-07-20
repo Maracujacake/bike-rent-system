@@ -51,10 +51,10 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a) ${sessionScope.nome}</h2>
             <ul class="space-y-4">
                 <li>
-                    <!-- Mostra todos os clientes -->
+                    <!-- Mostra todas as locações -->
                     <a href="${pageContext.request.contextPath}/admin/listLocacoes"
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Listar todas locacoes</a>
+                    >Listar todas locações</a>
                 </li>
                 <li>
                     <!-- Mostra todos os clientes -->
@@ -71,7 +71,14 @@
                 </li>
 
                 <li>
-                    <!-- Página de busca de cliente -->
+                    <!-- Página de Locadoras -->
+                    <a href="${pageContext.request.contextPath}/locadora/list"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Listar locadoras</a>
+                </li>
+
+                <li>
+                    <!-- Volta a página inicial -->
                     <a href="${pageContext.request.contextPath}"
                     class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
                     >Voltar à página inicial</a>
