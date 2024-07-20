@@ -16,7 +16,7 @@ execute com mvn clean package tomcat7:run-war
 <hr>
 
 - ## fixes
-- - Mensagem para deletar locacao esta errada.
+- - Mensagem para deletar locacao esta errada. &#x2611;
 
 
 <hr>
@@ -29,9 +29,9 @@ execute com mvn clean package tomcat7:run-war
 
 - tirar o adicionar locacao como locadora  -> ivan &#x2611;
 
-- editar propria locadora -> Chris &#x2610;
+- editar propria locadora -> Chris &#x2611;
 
-- cliente deveria editar seus dados -> Vitor &#x2610;
+- cliente deveria editar seus dados -> Vitor &#x2611;
 
 - mandar emails pos locacao -> Ivan &#x2611;
 
