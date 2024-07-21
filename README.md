@@ -12,7 +12,7 @@ como a data e hora da locação e com que locadora e cliente este foi realizada.
 
 ### Índice
 1. [Instalação](#requisitos-e-instalação)
-2. [Capturas de tela](#capturas-de-tela)
+2. [Tela Inicial](#tela-inicial)
 4. [Funcionalidades](#funcionalidades)
 5. [Documentação](#documentação-e-estrutura)
 6. [Tecnologias](#tecnologias-usadas)
@@ -25,7 +25,8 @@ Instalação em sistemas linux: ```sudo apt install openjdk-8-jdk```
 Instalação em sistemas linux ```sudo apt install maven```
 - Execução do projeto: ```mvn clean package tomcat7:run```
 
-### Capturas de tela
+### Tela Inicial
+![vaai](https://github.com/user-attachments/assets/cf270761-4747-4069-b550-cec29e703f5f)
 
 
 ### Funcionalidades
