@@ -61,6 +61,7 @@
                                     <th class="border border-gray-300 px-4 py-2">CNPJ</th>
                                     <th class="border border-gray-300 px-4 py-2">CPF</th>
                                     <th class="border border-gray-300 px-4 py-2">Data</th>
+                                    <th class="border border-gray-300 px-4 py-2">Opções</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +71,10 @@
                                         <td class="border border-gray-300 px-4 py-2">${locacao.cnpjLocadora}</td>
                                         <td class="border border-gray-300 px-4 py-2">${locacao.cpfCliente}</td>
                                         <td class="border border-gray-300 px-4 py-2">${locacao.registro}</td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <a href="${pageContext.request.contextPath}/admin/editarLocacao?id=${locacao.id}" class="text-blue-500 hover:underline">Update</a>
+                                            <a href="${pageContext.request.contextPath}/admin/deletarLocacao?id=${locacao.id}" class="text-red-500 hover:underline ml-2 delete-link">Delete</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

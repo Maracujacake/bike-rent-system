@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 import dao.ClienteDAO;
 import dao.LocacaoDAO;
@@ -49,7 +50,6 @@ public class ControllerAdmin extends HttpServlet {
         }
 
         try {
-            System.out.println(action);
             switch (action) {
 
                 // CLIENTE
@@ -99,6 +99,18 @@ public class ControllerAdmin extends HttpServlet {
                     listLocacoes(request, response);
                     break;
 
+                case "/editarLocacao":
+                    editarLocacao(request, response);
+                    break;
+                
+                case "/atualizarLocacao":
+                    atualizarLocacao(request, response);
+                    break;
+
+                case "/deletarLocacao":
+                    deletarLocacao(request, response);
+                    break;
+
                 default:
                     paginaInicial(request, response);
                     break;
@@ -124,7 +136,46 @@ public class ControllerAdmin extends HttpServlet {
         request.setAttribute("listaLoc", listaLocacoes);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/locacaoLista.jsp");
         dispatcher.forward(request, response);
-       
+    }
+
+    private void editarLocacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idLocacao = request.getParameter("id");
+        if (idLocacao != null) {
+            try {
+                long id = Long.parseLong(idLocacao);
+                Locacao locacao = locacaoDao.getByID(id);
+                if (locacao != null) {
+                    request.setAttribute("locacao", locacao);
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("/adminView/editarLocacao.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("Locacao não encontrada. ID não reconhecido");
+                }
+            } catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+        }
+    }
+
+    private void atualizarLocacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        String cpf = request.getParameter("cpfCliente");
+        String cnpj = request.getParameter("cnpjLocadora");
+        String dataHorario = request.getParameter("dataHorario");
+        LocalDateTime dtDiaHora = LocalDateTime.parse(dataHorario);
+        Locacao locacaoAtualizado = new Locacao(id, cpf, cnpj, dtDiaHora);
+        locacaoDao.update(locacaoAtualizado);
+        response.sendRedirect("");
+    }
+
+    private void deletarLocacao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        locacaoDao.delete(id);
+        // Redireciona para a pagina de locacoes de cliente
+        response.sendRedirect("clienteCPF");
     }
 
 
