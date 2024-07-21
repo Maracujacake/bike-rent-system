@@ -4,15 +4,12 @@
 <fmt:setBundle basename="message" />
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title><fmt:message key="opcoes" /></title>
+    <title>Editar Cliente</title>
 </head>
-									<!-- MOSTRA TODAS AS OPÇÕES REFERENTES A CLIENTE-->
 <body class="bg-gray-100">
-
     <nav class="bg-white border-gray-200 dark:bg-gray-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/bikes-rent" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -53,62 +50,39 @@
         </div>
     </nav>
     <div class="flex justify-center items-center h-screen">
-        <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4"> <fmt:message key="bemvindo" /> ${sessionScope.nome}</h2>
-            <ul class="space-y-4">
-                <li>
-                    <!-- Mostra todos os clientes -->
-                    <a href="${pageContext.request.contextPath}/admin/listLocadora"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Listar todas locadoras</a>
-                </li>
-                <li>
-                    <!-- Mostra todos os clientes -->
-                    <a href="${pageContext.request.contextPath}/admin/listLocacoes"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >
-                        <fmt:message key="locacao.lista" />
-                    </a>
-                </li>
-                <li>
-                    <!-- Mostra todos os clientes -->
-                    <a href="${pageContext.request.contextPath}/admin/listCliente"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >
-                        <fmt:message key="cliente.lista" />
-                    </a>
-                </li>
+        <div class="max-w-lg w-full p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 my-8 text-center"><fmt:message key="locadora.editarLoc" /></h2>
+            <form action="${pageContext.request.contextPath}/locadoraLogged/atualizarLocadora" method="post" class="space-y-4">
 
-                <li>
-                    <!-- Página de busca de cliente -->
-                    <a href="${pageContext.request.contextPath}/admin/buscarCliente"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >
-                        <fmt:message key="cliente.busca" />
-                    </a>
-                </li>
+                <input type="hidden" name="id" value="${locadora.id}">
+                <input type="hidden" name="cnpj" value="${locadora.cnpj}">
 
-                <li>
-                    <!-- Página de Locadoras -->
-                    <a href="${pageContext.request.contextPath}/locadora/list"
-                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >
-                        <fmt:message key="locadora.lista" />
-                    </a>
-                </li>
+                <div>
+                    <label for="nome" class="block text-sm font-medium text-gray-700"><fmt:message key="nome" /></label>
+                    <input type="text" name="nome" value="${locadora.nome}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-                <li>
-                    <!-- Volta a página inicial -->
-                    <a href="${pageContext.request.contextPath}"
-                    class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
-                    >
-                        <fmt:message key="homepage" />
-                    </a>
-                </li>
-            </ul>
+                <div>
+                    <label for="senha" class="block text-sm font-medium text-gray-700"><fmt:message key="senha" /></label>
+                    <input type="text" name="senha" value="${locadora.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="text" name="email" value="${locadora.email}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="cidade" class="block text-sm font-medium text-gray-700"><fmt:message key="cidade" /></label>
+                    <input type="text" name="cidade" value="${locadora.cidade}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md
+                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"><fmt:message key="atualizar" /></button>
+                </div>
+            </form>
         </div>
     </div>
-
 </body>
-
 </html>

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="${not empty param.lang ? param.lang : 'pt'}" />
+<fmt:setBundle basename="message" />
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Opções</title>
 </head>
-									<!-- MOSTRA TODAS AS OPÇÕES REFERENTES A CLIENTE-->
+									<!-- MOSTRA TODAS AS OPÇÕES REFERENTES A LOCADORA-->
 <body class="bg-gray-100">
     <nav class="bg-white border-gray-200 dark:bg-gray-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -28,13 +31,16 @@
                     <li>
                         <a href="/bikes-rent/cliente/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                          hover:text-blue-300 transition duration-300"
-                         aria-current="page">Cliente</a>
+                         aria-current="page">
+                         <fmt:message key="cliente" />
+                        </a>
                     </li>
                     <li>
                         <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
-                            Locadora</a>
+                            <fmt:message key="locadora" />
+                        </a>
                     </li>
                     <li>
                         <a href="/bikes-rent/admin/" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white
@@ -47,13 +53,24 @@
     </nav>
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md p-8 bg-white rounded shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bem-vindo(a) ${sessionScope.nome}!</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4"><fmt:message key="bemvindo" /> ${sessionScope.nome}!</h2>
             <ul class="space-y-4">
                 <li>
                     <!-- manda para formulário de CPF para busca de locações -->
                     <a href="${pageContext.request.contextPath}/locadoraLogged/locacoesCNPJ"
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
-                    >Listar suas locações</a>
+                    >
+                        <fmt:message key="cliente.listarLocacao" />
+                    </a>
+                </li>
+
+                <li>
+                    <!-- opção de editar as próprias informações -->
+                    <a href="${pageContext.request.contextPath}/locadoraLogged/editarLocadora"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >
+                        <fmt:message key="cliente.editar" />
+                    </a>
                 </li>
 
 
@@ -61,7 +78,9 @@
                     <!-- manda para formulário de criação de locação -->
                     <a href="${pageContext.request.contextPath}/"
                     class="block px-4 py-2 rounded bg-gray-500 text-white font-bold hover:bg-blue-600"
-                    >Voltar à página inicial</a>
+                    >
+                        <fmt:message key="homepage" />
+                    </a>
                 </li>
             </ul>
         </div>

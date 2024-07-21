@@ -18,8 +18,8 @@ import dao.LocadoraDAO;
 import domain.Cliente;
 import domain.Locacao;
 import domain.Locadora;
-import utils.DataUtils;
 
+// Todas as funções de administração do sistema
 @WebServlet(urlPatterns = "/admin/*")
 public class ControllerAdmin extends HttpServlet {
 
@@ -127,15 +127,18 @@ public class ControllerAdmin extends HttpServlet {
        
     }
 
-    // Página inicial
+
+    // Página inicial de opções
     private void paginaInicial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/opcoesAdmin.jsp");
         dispatcher.forward(request, response);
     }
 
-    // CLIENTE
-    // Funções de READ
+    // ***** CLIENTE *****
+
+    // *** Funções de READ ***
+
     // Apresenta todos os clientes
     private void listarClientes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -143,14 +146,12 @@ public class ControllerAdmin extends HttpServlet {
         
          
         request.setAttribute("listaCliente", listaCliente);
-        // o loop infinito era causado por erro no caminho do arquivo jsp. a pasta
-        // webapp é a ''raiz''
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/clienteLista.jsp");
         dispatcher.forward(request, response);
-
     }
 
-    // apresenta formulário de busca de cliente
+
+    // Apresenta formulário de busca de cliente por ID
     private void paginaBuscarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Teste de conexão: System.out.println("cade a pagina fi");
@@ -158,7 +159,7 @@ public class ControllerAdmin extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // procura cliente pelo seu ID no banco
+    // Procura cliente pelo seu ID no banco
     private void procuraCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idCliente = request.getParameter("id");
@@ -182,9 +183,10 @@ public class ControllerAdmin extends HttpServlet {
         }
     }
 
-    // Funções de UPDATE
-    // apresenta formulário de edição de cliente com informações referentes ao seu
-    // id
+    // *** Funções de UPDATE ***
+
+
+    // Apresenta formulário de edição de cliente com informações referentes ao seu id
     private void editarClienteForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -194,7 +196,8 @@ public class ControllerAdmin extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // atualiza informações de cliente no banco de dados
+
+    // Atualiza informações de cliente no banco de dados
     private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -212,8 +215,10 @@ public class ControllerAdmin extends HttpServlet {
         response.sendRedirect("listCliente");
     }
 
-    // Funções de DELETE
-    // deleta cliente do banco de dados
+    // *** Funções de DELETE ***
+
+
+    // Deleta cliente do banco de dados
     private void deletarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -222,20 +227,23 @@ public class ControllerAdmin extends HttpServlet {
         response.sendRedirect("listCliente");
     }
 
-    // LOCADORA
-    // Funções de UPDATE
-    // apresenta formulário de edição de Locadora com informações referentes ao seu
-    // id
+
+    // ***** LOCADORA *****
+
+
+    // *** Funções de UPDATE ***
+
+    // Apresenta formulário de edição de Locadora com informações referentes ao seu id
     private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Locadora LocadoraExistente = locadoraDao.get(id);
+        Locadora LocadoraExistente = locadoraDAO.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/editarLocadora.jsp");
         request.setAttribute("Locadora", LocadoraExistente);
         dispatcher.forward(request, response);
     }
 
-    // atualiza informações de Locadora no banco de dados
+    // Atualiza informações de Locadora no banco de dados
     private void atualizarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -246,16 +254,17 @@ public class ControllerAdmin extends HttpServlet {
         String cnpj = request.getParameter("cnpj");
 
         Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
-        locadoraDao.update(LocadoraAtualizado);
+        locadoraDAO.update(LocadoraAtualizado);
         response.sendRedirect("listCliente");
     }
 
-    // Funções de DELETE
-    // deleta Locadora do banco de dados
+    // *** Funções de DELETE ***
+
+    // Deleta Locadora do banco de dados
     private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        locadoraDao.delete(id);
+        locadoraDAO.delete(id);
         // redireciona para a pagina em Locadora/list
         response.sendRedirect("");
     }

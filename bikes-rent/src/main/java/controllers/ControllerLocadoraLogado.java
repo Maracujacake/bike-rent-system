@@ -14,20 +14,19 @@ import javax.servlet.http.HttpSession;
 
 import dao.LocacaoDAO;
 import dao.LocadoraDAO;
-import dao.LocadoraLoginDAO;
 import domain.Locacao;
+import domain.Locadora;
 
+// Funções referentes à Locadora quando logada
 @WebServlet(urlPatterns = "/locadoraLogged/*")
 public class ControllerLocadoraLogado extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private LocadoraLoginDAO dao;
     private LocadoraDAO daoLocadora;
     private LocacaoDAO daoLocacao;
 
     @Override
     public void init() {
-        dao = new LocadoraLoginDAO();
         daoLocadora = new LocadoraDAO();
     }
 
@@ -47,19 +46,31 @@ public class ControllerLocadoraLogado extends HttpServlet {
 
         try {
             switch (action) {
+
+                // READ
                 case "/locacoesCNPJ":
                     buscaLocacoesCNPJ(request, response);
                     break;
 
-                case "editarLocacao":
+                // UPDATE
+                case "/editarLocacao":
                     editarLocacao(request, response);
                     break;
 
-                case "atualizarLocacao":
+                case "/atualizarLocacao":
                     atualizarLocacao(request, response);
                     break;
+                
+                case "/editarLocadora":
+                    editarLocadora(request, response);
+                    break;
 
-                case "deletarLocacao":
+                case "/atualizarLocadora":
+                    atualizarLocadora(request, response);
+                    break;
+
+                // DELETE
+                case "/deletarLocacao":
                     deletarLocacao(request, response);
                     break;
 
@@ -72,11 +83,15 @@ public class ControllerLocadoraLogado extends HttpServlet {
         }
     }
 
+    // Página inicial de opções de Locadora 
     private void paginaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraLogado/opcoesLocadora.jsp");
         dispatcher.forward(request, response);
     }
 
+    // *** Funções de READ ***
+
+    // Busca todas as locações de uma locadora pelo CNPJ
     private void buscaLocacoesCNPJ(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -90,6 +105,9 @@ public class ControllerLocadoraLogado extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // *** Funções de UPDATE ***
+
+    // Apresenta formulário de edição de Locação
     private void editarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idLocacao = request.getParameter("id");
@@ -112,6 +130,7 @@ public class ControllerLocadoraLogado extends HttpServlet {
         }
     }
 
+    // Atualiza Locação no banco
     private void atualizarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -124,6 +143,34 @@ public class ControllerLocadoraLogado extends HttpServlet {
         response.sendRedirect("");
     }
 
+    private void editarLocadora(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+                //System.out.println("chegou aqui");
+                HttpServletRequest httpRequest = (HttpServletRequest) request;
+                HttpSession session = httpRequest.getSession(false);
+                String cnpj = (String) session.getAttribute("cnpj");
+                Locadora locadora = daoLocadora.getByCnpj(cnpj);
+              
+                request.setAttribute("locadora", locadora);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/locadoraLogado/editarLocadora.jsp");
+                dispatcher.forward(request, response);
+    }
+
+    private void atualizarLocadora(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String cidade = request.getParameter("cidade");
+        String cnpj = request.getParameter("cnpj");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        daoLocadora.update(new Locadora(id, senha, nome, cidade, cnpj, email));
+        response.sendRedirect("");
+    }
+
+    // *** Funções de DELETE ***
+
+    // Deleta Locação do banco
     private void deletarLocacao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));

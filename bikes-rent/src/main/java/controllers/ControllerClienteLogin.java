@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.ClienteLoginDAO;
 import domain.Cliente;
 
-// confere as informações de login do cliente provenientes do loginCliente.jsp
+// Confere as informações de login do cliente provenientes do loginCliente.jsp
 @WebServlet("/clienteLogin")
 public class ControllerClienteLogin extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,6 @@ public class ControllerClienteLogin extends HttpServlet {
     @Override
     public void init() {
         dao = new ClienteLoginDAO();
-        // System.out.println("ALO"); teste de inicialização
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

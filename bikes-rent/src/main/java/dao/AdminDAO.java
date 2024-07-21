@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import domain.Admin;
 
+// ** Funções com acesso ao banco de ADMIN
+
 public class AdminDAO extends GenericDAO {
      public Admin authAdmin(String email, String senha) {
         String sql = "SELECT * FROM admin WHERE email = ? AND senha = ?";

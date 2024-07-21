@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     deleteLinks.forEach(link => {
         link.addEventListener('click', function (event) {
-            const confirmed = confirm('Você tem certeza que deseja deletar este cliente?');
+            const confirmed = confirm('Você tem certeza que deseja deletar?');
 
             if (!confirmed) {
                 event.preventDefault();

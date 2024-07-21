@@ -13,12 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdminDAO;
 
-// confere as informações de login do cliente provenientes do loginCliente.jsp
+// Confere as informações de login do cliente provenientes do loginCliente.jsp
 @WebServlet("/adminLogin")
 public class ControllerAdminLogin extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private AdminDAO dao;
 
+    // Inicialização
     @Override
     public void init() {
         dao = new AdminDAO();

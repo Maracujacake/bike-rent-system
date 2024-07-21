@@ -115,7 +115,7 @@
 
                             <a href="${pageContext.request.contextPath}"
                                 class="text-gray-500 hover:underline">
-                                Voltar à página inicial
+                                <fmt:message key="homepage" />
                             </a>
 
                             <a href="${pageContext.request.contextPath}/locadora/buscarLocadora"
