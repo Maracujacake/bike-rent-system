@@ -1,7 +1,10 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,7 +64,7 @@ public class ControllerPublic extends HttpServlet {
 
     }
 
-    private void criarCliente(HttpServletRequest request, HttpServletResponse response) {
+    private void criarCliente(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
@@ -70,6 +73,12 @@ public class ControllerPublic extends HttpServlet {
         String cpf = request.getParameter("cpf");
         Date dataNascimento = Date.valueOf(request.getParameter("dataNascimento"));
 
+        if(cpf.length() >11 || telefone.length() > 13 || nome.length() >100 || email.length() >100 ){
+            String errorMessage = URLEncoder.encode("Campo com muitos caracteres!",
+                    StandardCharsets.UTF_8.toString());
+            response.sendRedirect("public?error=" + errorMessage);
+            return;
+        }
         try {
             Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
             clienteDAO.insert(novoCliente);

@@ -8,6 +8,7 @@
         <head>
             <meta charset="UTF-8">
             <script src="https://cdn.tailwindcss.com"></script>
+            <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
             <title>
                 <fmt:message key="cliente.new" />
             </title>
