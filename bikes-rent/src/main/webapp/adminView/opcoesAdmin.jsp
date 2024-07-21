@@ -57,7 +57,13 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4"> <fmt:message key="bemvindo" /> ${sessionScope.nome}</h2>
             <ul class="space-y-4">
                 <li>
-                    <!-- Mostra todas as locações -->
+                    <!-- Mostra todos os clientes -->
+                    <a href="${pageContext.request.contextPath}/admin/listLocadora"
+                    class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
+                    >Listar todas locadoras</a>
+                </li>
+                <li>
+                    <!-- Mostra todos os clientes -->
                     <a href="${pageContext.request.contextPath}/admin/listLocacoes"
                     class="block px-4 py-2 rounded bg-blue-500 text-white font-bold hover:bg-blue-600"
                     >
