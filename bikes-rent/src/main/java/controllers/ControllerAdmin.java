@@ -19,6 +19,7 @@ import dao.LocadoraDAO;
 import domain.Cliente;
 import domain.Locacao;
 import domain.Locadora;
+import utils.DataUtils;
 
 // Todas as funções de administração do sistema
 @WebServlet(urlPatterns = "/admin/*")
@@ -165,6 +166,12 @@ public class ControllerAdmin extends HttpServlet {
         String cnpj = request.getParameter("cnpjLocadora");
         String dataHorario = request.getParameter("dataHorario");
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHorario);
+        if (!DataUtils.checkFullHour(dtDiaHora)) {
+            String errorMessage = URLEncoder.encode("O registro deve estar na hora cheia (ex: 13:00, 15:00).",
+                    StandardCharsets.UTF_8.toString());
+            response.sendRedirect("editarLocacao?id=" + id+ "&error=" + errorMessage);
+            return;
+        }
         Locacao locacaoAtualizado = new Locacao(id, cpf, cnpj, dtDiaHora);
         locacaoDao.update(locacaoAtualizado);
         response.sendRedirect("");

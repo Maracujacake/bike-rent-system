@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="${pageContext.request.contextPath}/scripts/clientNotFound.js"></script>
     <title>Editar Cliente</title>
 </head>
 <body class="bg-gray-100">
