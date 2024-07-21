@@ -237,7 +237,7 @@ public class ControllerAdmin extends HttpServlet {
     private void editarLocadoraForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Locadora LocadoraExistente = locadoraDAO.get(id);
+        Locadora LocadoraExistente = locadoraDao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminView/editarLocadora.jsp");
         request.setAttribute("Locadora", LocadoraExistente);
         dispatcher.forward(request, response);
@@ -254,7 +254,7 @@ public class ControllerAdmin extends HttpServlet {
         String cnpj = request.getParameter("cnpj");
 
         Locadora LocadoraAtualizado = new Locadora(id, senha, nome, cidade, cnpj, email);
-        locadoraDAO.update(LocadoraAtualizado);
+        locadoraDao.update(LocadoraAtualizado);
         response.sendRedirect("listCliente");
     }
 
@@ -264,7 +264,7 @@ public class ControllerAdmin extends HttpServlet {
     private void deletarLocadora(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        locadoraDAO.delete(id);
+        locadoraDao.delete(id);
         // redireciona para a pagina em Locadora/list
         response.sendRedirect("");
     }
