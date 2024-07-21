@@ -1,61 +1,51 @@
-# bike-rent-system
+<div align="center">
+  <h2> 📝 Bike Rent System 📝 </h2>
+  <img src="https://github.com/Maracujacake/bike-rent-system/blob/main/bikes-rent/src/main/webapp/imagemLogoSemFundo3.png" width="200">
+  <p> Um sistema conciso de locação de bicicletas entre clientes e locadoras.</p>
+</div>
 
-Sistema de locação de bicicletas.
+### Sobre
+- O sistema apresentado neste repositório tem como objetivo cadastrar locações de clientes com locadoras guardando no banco de dados informações relevantes
+como a data e hora da locação e com que locadora e cliente este foi realizada.
+- O projeto conta com um sistema de login para clientes, locadoras e administradores, com cada cargo tendo permissões específicas para a realização de suas tarefas.
+- Idiomas suportados: **Português-BR, Inglês, Alemão, Chines simplificado.**
 
-http://localhost:8080/bikes-rent/
-execute com mvn clean package tomcat7:run-war
+### Índice
+1. [Instalação](#requisitos-e-instalação)
+2. [Capturas de tela](#capturas-de-tela)
+4. [Funcionalidades](#funcionalidades)
+5. [Documentação](#documentação-e-estrutura)
+6. [Tecnologias](#tecnologias-usadas)
+7. [Autores](#autores)
 
-# Configurar .env
+### Requisitos e instalação
+- Para utilização deste projeto você deve possuir uma versão do **Java** instalada na sua máquina, preferencialmente acima da 8.
+Instalação em sistemas linux: ```sudo apt install openjdk-8-jdk```
+- Para execução do projeto e build de possíveis alterações, precisará ter instalado o gerenciador de dependências **Maven**
+Instalação em sistemas linux ```sudo apt install maven```
+- Execução do projeto: ```mvn clean package tomcat7:run```
 
-    - Criar arquivo .env dentro da pasta bikes-rent
-    - Adicionar campos *DB_USER*, *DB_PASSWORD*, *EMAILKEY*
+### Capturas de tela
 
-# to-dos:
 
-- ## organizar o código
+### Funcionalidades
+- O projeto teve foco em cobrir todos os seguintes requisitos:
+- [Requisitos A 1 Servlets.pdf](https://github.com/user-attachments/files/16325802/Requisitos.A.1.Servlets.pdf)
 
-<hr>
+### Documentação e Estrutura
+- Além da documentação do código, disponibilizamos um diagrama UML para melhor visualização do funcionamento do sistema:
 
-- ## fixes
-- - Mensagem para deletar locacao esta errada. &#x2611;
+- [Diagrama UML](https://miro.com/app/board/uXjVK87TU4w=/?share_link_id=917250205174)
 
-<hr>
+### Tecnologias Usadas
+- [Java EE | Servlets ](https://www.oracle.com/br/java/technologies/java-ee-glance.html)
+- [TailWindCSS](https://tailwindcss.com/)
+- JavaScript
 
-- ## implementação
-
-- formatar horário locação -> Ivan &#x2611;
-
-- mostrar que login falhou -> ivan &#x2611;
-
-- tirar o adicionar locacao como locadora -> ivan &#x2611;
-
-- editar propria locadora -> Chris &#x2611;
-
-- cliente deveria editar seus dados -> Vitor &#x2611;
-
-- mandar emails pos locacao -> Ivan &#x2611;
-
-- requisito 7 ? -> ivan &#x2611;
-
-- terminar traducoes adicionar botao para mudar linguagem das paginas -> Chris &#x2610;
-
-- verificar tratativas de erros/fuçar para encontrar problemas -> TODOS &#x2610;
-
-- atualizar pagina de atualizar locacao -> Carol &#x2611;
-
-- lista de locações da locadora faltando a parte de opções e cpf do cliente talvez. -> Carol &#x2610;
-
-- Listar locadoras para o admin, e a possibilidade dele editar, deletar. -> Carol &#x2611;
-
-- Listar todas locacoes na parte de admin. -> &#x2611;
-
-- Botao para voltar para Home em todas telas. -> ivan &#x2611;
-
-- Criar botão na tela inicial para cadastrar usuário. -> Ivan &#x2611;
-
-- ## Duvidas
-- - Locadoras tem apenas uma bicicleta ?
-
-- ## Obs
-- Para mudar a caixinha é so trocar por &#x2611 terminado com ;
-- Alguns erros apareceram no console referentes a diferença de versões/compatibilidade com a dependencia de mandar email, porem nao afeta o funcionamento do sistema.
+### Autores
+- :octocat: [Ivan](https://github.com/thativam)
+- :octocat: [Chris](https://github.com/Maracujacake)
+- :octocat: [Carolina](https://github.com/CarolinaMartinsEmilio)
+- :octocat: [Vítor](https://github.com/VMila)
+  
+O projeto foi realizado para conclusão do trabalho da disciplina de *Desenvolvimento de Software para Web 1* (DSW1) da UFSCar no período 2024/1 
