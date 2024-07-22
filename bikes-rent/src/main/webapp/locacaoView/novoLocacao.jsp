@@ -51,10 +51,10 @@
             <form action="${pageContext.request.contextPath}/cliente/inserirLocacao" method="post" class="space-y-4">
 
                 <div>
-                    <label for="cnpj" class="block text-sm font-medium text-gray-700">CNPJ Locadora:</label>
+                    <label for="cnpj" class="block text-sm font-medium text-gray-700">Nome Locadora:</label>
                     <select name="cnpj" required>
                         <c:forEach var="locadora" items="${listaLocadora}">
-                            <option value="${locadora.cnpj}">${locadora.cnpj}</option>
+                            <option value="${locadora.cnpj}">${locadora.nome}</option>
                         </c:forEach>
                     </select>
                 </div>

@@ -56,6 +56,14 @@
                     <label for="nome" class="block text-sm font-medium text-gray-700"><fmt:message key="nome" />:</label>
                     <input type="text" name="nome" value="${cliente.nome}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="text" name="email" value="${cliente.email}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="senha" class="block text-sm font-medium text-gray-700"><fmt:message key="senha" /></label>
+                    <input type="password" name="senha" value="${cliente.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
                 <div>
                     <label for="telefone" class="block text-sm font-medium text-gray-700"><fmt:message key="phone" />:</label>

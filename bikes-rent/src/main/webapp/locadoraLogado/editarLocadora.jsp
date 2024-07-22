@@ -64,7 +64,7 @@
 
                 <div>
                     <label for="senha" class="block text-sm font-medium text-gray-700"><fmt:message key="senha" /></label>
-                    <input type="text" name="senha" value="${locadora.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <input type="password" name="senha" value="${locadora.senha}" required class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <div>
